@@ -1,0 +1,63 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@fontsource/ibm-plex-sans/300.css";
+@import "@fontsource/ibm-plex-sans/400.css";
+@import "@fontsource/ibm-plex-sans/500.css"; 
+@import "@fontsource/ibm-plex-sans/600.css"; 
+@import "@fontsource/ibm-plex-sans/700.css"; 
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #000000;
+    --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+/* @theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+} */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #000000;
+    --foreground: #000000;
+  }
+}
+@layer utilities{
+  .section-container{
+    @apply px-4 md:px-10 lg:px-20;
+  }
+}
+@media (min-width: 768px) {
+  .swiper-pagination {
+    display: none !important;
+  }
+}
+body {
+  background: var(--background);
+  color: var(--foreground);
+
+}
+.custom-swiper-pagination .swiper-pagination-bullet {
+  background-color: #ddd;      
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+  margin: 0 6px;
+  transition: all 0.3s ease;
+  border-radius: 9999px;
+}
+
+
+.custom-swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #F8BE4C;     
+  width: 20px;                  
+  border-radius: 9999px;
+}

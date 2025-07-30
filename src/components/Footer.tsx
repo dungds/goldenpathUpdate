@@ -1,0 +1,153 @@
+import { Icon } from "@iconify/react";
+
+import { Paragraph } from "@/components/ui";
+import { industries, services, socialLink } from "@/lib/data";
+import Link from "next/link";
+import Image from "next/image";
+
+export default function Footer() {
+  const linkfb = socialLink.facebook;
+  const linkin = socialLink.linkedin;
+  const linkins = socialLink.instagram;
+  return (
+    <footer className="py-10 text-text-on-dark section-container bg-[url(/img/bg_footer.jpg)] bg-no-repeat bg-cover bg-gray-100 text-black">
+      <div
+        className="
+                 grid lg:grid-cols-4  md:pt-6 lg:gap-4 md:grid-cols-2 md:gap-6 grid-cols-1"
+      >
+        <div className="flex-col flex gap-4">
+          <div>
+            <Image
+              src="/uploads/logo.svg"
+              className="w-24 md:w-32"
+              width={180}
+              height={55}
+              alt="logo Golden Path"
+            />
+          </div>
+
+          <div>
+            <ul className="flex-col flex gap-2 ">
+              <li className="flex gap-1 items-center">
+                <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
+                  <Icon icon="lets-icons:gps-fixed" className="w-6 h-6" />
+                </div>
+                <p className="md:text-lg text-left">
+                  P.O. Box: 58526, 8th Floor, City Tower-2, Sheikh Zayed Road,
+                  Dubai – UAE
+                </p>
+              </li>
+              <li className="flex gap-1 items-center">
+                <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
+                  <Icon icon="mdi:email" className="text-ondark w-6 h-6" />
+                </div>
+
+                <Paragraph className="md:text-lg">
+                  admin@goldenpath.com
+                </Paragraph>
+              </li>
+              <li className="flex gap-1 items-center">
+                <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
+                  <Icon
+                    icon="solar:phone-bold"
+                    className="text-ondark w-6 h-6"
+                  />
+                </div>
+
+                <Paragraph className="md:text-lg">03256154</Paragraph>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="flex-col  gap-4 hidden md:flex">
+          <div className='uppercase relative  before:content-[""] before:absolute before:left-0 before:w-2 before:h-4 before:bg-primary before:-translate-y-1/2 before:top-1/2 pl-4 text-lg'>
+            Industries
+          </div>
+          <div>
+            <ul className="flex-col flex gap-2 font-light">
+              {industries.map((industry) => (
+                <li
+                  key={industry.id}
+                  className="flex gap-1 items-center hover:text-primary"
+                >
+                  <Link href={industry.slug}> {industry.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="flex-col  gap-4 hidden md:flex">
+          <div className='uppercase relative  before:content-[""] before:absolute before:left-0 before:w-2 before:h-4 before:bg-primary before:-translate-y-1/2 before:top-1/2 pl-4 text-lg'>
+            Services
+          </div>
+          <div>
+            <ul className="flex-col flex gap-2 font-light">
+              {services.map((service) => (
+                <li
+                  key={service.id}
+                  className="flex gap-1 items-center hover:text-primary"
+                >
+                  <Link href={service.slug}> {service.title}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="flex-col flex gap-4">
+          <div className=' uppercase relative  before:content-[""] before:absolute before:left-0 before:w-2 before:h-4 before:bg-primary before:-translate-y-1/2 before:top-1/2 pl-4 hidden md:block text-lg'>
+            Company
+          </div>
+          <div>
+            <ul className="font-light hidden md:flex flex-col gap-2">
+              <li className="flex gap-1 items-center hover:text-primary font-normal">
+                <Link href={"/about"}>About Us</Link>
+              </li>
+              <li className="flex gap-1 items-center hover:text-primary">
+                <Link href={"/contact"}>Contact Us</Link>
+              </li>
+            </ul>
+            <div className="pt-4">
+              <ul className="flex gap-4 ">
+                <li>
+                  <Link href={linkfb.link}>
+                    <Icon
+                      className=" hover:text-primary border-white rounded-full p-1"
+                      icon="basil:linkedin-solid"
+                      width="30"
+                      height="30"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link href={linkins.link}>
+                    <Icon
+                      className="  hover:text-primary border-white rounded-full"
+                      icon="typcn:social-facebook"
+                      width="30"
+                      height="30"
+                    />
+                  </Link>
+                </li>
+                <li>
+                  <Link href={linkins.link}>
+                    <Icon
+                      className=" p-1  border-white rounded-full hover:text-primary"
+                      icon="famicons:logo-instagram"
+                      width="30"
+                      height="30"
+                    />
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center opacity-50 pt-8 font-normal text-sm md:pt-16 md:pb-4">
+        {" "}
+        © {new Date().getFullYear()} Golden Path. All rights reserved.
+      </div>
+    </footer>
+  );
+}
