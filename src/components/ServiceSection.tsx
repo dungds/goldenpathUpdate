@@ -3,16 +3,21 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import Image from "next/image";
-import { services, Service } from "@/lib/data";
+import type { Service } from "@/app/lib/types/services";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
+import { fetchCollection } from "@/app/lib/api/fetchCollection";
+type Props = {
+  services: Service[];
+};
 
-export default function ServiceSection() {
+export default async function ServiceSection({ services }: Props) {
+  const [selected, setSelected] = useState<Service>(services[0]);
+
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
   };
-  const [selected, setSelected] = useState<Service>(services[0]);
 
   return (
     <section className="bg-[url(/img/swirl.png)] bg-no-repeat bg-left-top text-text-on-dark bg-background-secondary  md:pb-16 pt-10 md:pt-16">
@@ -39,7 +44,7 @@ export default function ServiceSection() {
                       : "bg-white font-semibold  hover:bg-gray-100 "
                   } transition`}
                 >
-                  {service.title}
+                  {service.name}
                 </button>
 
                 <div
@@ -51,8 +56,8 @@ export default function ServiceSection() {
                 >
                   <div className=" w-full ">
                     <Image
-                      src={service.image}
-                      alt={service.title}
+                      src={""}
+                      alt={service.section1_description}
                       unoptimized
                       width={1000}
                       height={600}
@@ -61,7 +66,7 @@ export default function ServiceSection() {
                   </div>
                   <div>
                     <Paragraph className="mb-4 line-clamp-5 px-4">
-                      {service.description}
+                      {service.section1_description}
                     </Paragraph>
                     <div className="text-right">
                       <Button

@@ -1,12 +1,16 @@
-"use client";
-
 import Image from "next/image";
 import FaqSection from "@/components/FraSection";
 import ContactForm from "@/components/ContactForm";
 import PartnerSlider from "@/components/Partner";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
+import { fetchFaqs } from "../lib/api/faqs";
+import { fetchPartners } from "../lib/api/FetchImage";
 
-export default function About() {
+export default async function About() {
+  const faqs = await fetchFaqs();
+  const partners = await fetchPartners();
+  console.log("Fetched partner:", partners);
+
   return (
     <section>
       <section className="py-10 pb-20 md:p-16 section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark md:gap-10 lg:gap-20 gap-6">
@@ -123,9 +127,9 @@ export default function About() {
         </div>
       </section>
 
-      <PartnerSlider />
+      <PartnerSlider partners={partners} />
       <ContactForm />
-      <FaqSection />
+      <FaqSection faqs={faqs} />
     </section>
   );
 }

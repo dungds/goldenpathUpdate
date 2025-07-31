@@ -5,12 +5,26 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
-import { industries, services } from "@/lib/data";
+import { industries } from "@/lib/data";
 import { useEffect, useState } from "react";
+import { fetchCollection } from "@/app/lib/api/fetchCollection";
+import type { Service } from "@/app/lib/types/services";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [services, setServices] = useState<Service[]>([]);
+
   useEffect(() => {
+    const getServices = async () => {
+      try {
+        const data = await fetchCollection<Service>("services");
+        setServices(data);
+      } catch (error) {
+        console.error("Failed to fetch services:", error);
+      }
+    };
+
+    getServices();
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -92,10 +106,10 @@ export default function Header() {
               {services.map((service) => (
                 <Link
                   key={service.id}
-                  href={`/services/${service.id}`}
+                  href={`/services/${service.slug}`}
                   className="px-4 py-2 hover:text-primary-dark  whitespace-nowrap"
                 >
-                  {service.title}
+                  {service.name}
                 </Link>
               ))}
             </div>

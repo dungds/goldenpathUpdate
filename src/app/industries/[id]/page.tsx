@@ -220,7 +220,7 @@ export default function IndustryDetail({
       </section>
 
       <ContactForm />
-      <FaqSection />
+      {/* <FaqSection /> */}
     </section>
   );
 }

@@ -8,20 +8,10 @@ import IndustrySlider from "@/components/IndustrySlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import PartnerSlider from "@/components/Partner";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
-
-type Faq = {
-  id: number;
-  question: string;
-  answer: string;
-};
+import { fetchFaqs } from "./lib/api/faqs";
 
 export default async function Home() {
-  const res = await fetch("http://127.0.0.1:8000/api/faqs", {
-    cache: "no-store",
-  });
-
-  const data = await res.json();
-  const faqs: Faq[] = data.data;
+  const faqs = await fetchFaqs();
   return (
     <div className="">
       <HeroSection />

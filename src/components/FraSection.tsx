@@ -3,12 +3,8 @@
 import { useState } from "react";
 import { H2, Paragraph } from "@/components/ui";
 import { Icon } from "@iconify/react";
+import type { Faq } from "@/app/lib/types/faqs";
 
-type Faq = {
-  id: number;
-  question: string;
-  answer: string;
-};
 export default function FaqSection({ faqs }: { faqs: Faq[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 

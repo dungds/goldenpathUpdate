@@ -8,12 +8,15 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Image from "next/image";
 
+import { LogoPartner } from "@/app/lib/types/logoPartners";
+
 import { industries } from "@/lib/data";
 
-import { partners } from "@/lib/data";
-export default function PartnerSlider() {
-  // trong component
-
+// import { partners } from "@/lib/data";
+type Props = {
+  partners: LogoPartner[];
+};
+export default function PartnerSlider({ partners }: Props) {
   return (
     <section className="bg-background  lg:px-40 px-6 py-6 md:py-14">
       <Swiper
@@ -24,7 +27,7 @@ export default function PartnerSlider() {
           delay: 3000,
           disableOnInteraction: false,
         }}
-        loop={industries.length > 4}
+        loop={partners.length > 4}
         breakpoints={{
           320: { slidesPerView: 3 },
           640: { slidesPerView: 3 },
@@ -37,8 +40,9 @@ export default function PartnerSlider() {
           <SwiperSlide key={partner.id}>
             <div className="h-24 w-full relative">
               <Image
-                src={partner.image}
-                fill
+                src={partner.logo}
+                width={200}
+                height={200}
                 alt="partner logo"
                 className="object-contain"
               />
