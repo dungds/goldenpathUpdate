@@ -38,7 +38,7 @@ export default function PartnerSlider({ partners }: Props) {
       >
         {partners.map((partner) => (
           <SwiperSlide key={partner.id}>
-            <div className="h-24 w-full relative">
+            <div className=" relative">
               <Image
                 src={partner.logo}
                 width={200}

@@ -69,7 +69,7 @@ export default async function ServiceDetail({
         </div>
       </section>
 
-      <section className="relative bg-[url(/img/bg-black-wave.png)] bg-no-repeat bg-cover">
+      <section className="relative bg-[url(/img/bg-black-wave.jpg)] bg-no-repeat bg-cover">
         <div className=" gap-4 md:gap-8 pt-14 md:pt-20  md:py-10  grid grid-cols-1 md:grid-cols-2 md:section-container  ">
           <div className="px-4 md:px-0">
             <H2 className="lg:text-5xl text-text-on-dark">
@@ -102,7 +102,7 @@ export default async function ServiceDetail({
           <div className=" ">
             <div className="flex relative text-center md:justify-self-center md:center">
               <Image
-                src={"/img/decor.png"}
+                src={"/img/decor.jpg"}
                 alt="decor"
                 className=" hidden md:block absolute -left-6 -bottom-6"
                 width={120}

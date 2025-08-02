@@ -5,7 +5,9 @@ import { usePathname } from "next/navigation";
 
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { industries, services } from "@/lib/data";
+import { industries } from "@/lib/data";
+import type { Service } from "@/app/lib/types/services";
+
 const menuItems = [
   { label: "Home", href: "/" },
   { label: "Industries", href: "/industries" },
@@ -14,7 +16,7 @@ const menuItems = [
   { label: "Contact", href: "/contact" },
 ];
 
-export default function MobileMenu() {
+export default function MobileMenu({ Services }: { Services: Service[] }) {
   const pathname = usePathname();
   const activeClass = (href: string) => {
     if (href === "/") {
@@ -129,7 +131,7 @@ export default function MobileMenu() {
                   exit={{ opacity: 0, height: 0 }}
                   className="flex flex-col gap-2 text-xl mt-2 bg-background-secondary overflow-hidden py-4"
                 >
-                  {industries.map((item) => (
+                  {Services.map((item) => (
                     <Link
                       href={`/services/${item.id}`}
                       key={item.id}
@@ -139,7 +141,7 @@ export default function MobileMenu() {
                       }}
                       className="px-4 pl-10 py-2"
                     >
-                      {item.title}
+                      {item.name}
                     </Link>
                   ))}
                 </motion.div>

@@ -124,7 +124,7 @@ export default function Header() {
             Contact
           </Link>
         </nav>
-        <MobileMenu />
+        <MobileMenu Services={services} />
       </div>
     </header>
   );
