@@ -11,45 +11,13 @@ import type { Service } from "@/app/lib/types/services";
 import type { Industry } from "@/app/lib/types/industries";
 import type { Setting } from "@/app/lib/types/settings";
 import { fetchSettings } from "@/app/lib/api/fetchSettings";
+import { asyncWrapProviders } from "async_hooks";
+export type NavigationData = {
+  services: Service[];
+  industries: Industry[];
+  settings: Setting;
+};
 export default function Header() {
-  const [settings, setSettings] = useState<Setting | null>(null);
-
-  const [isScrolled, setIsScrolled] = useState(false);
-  const [servicesData, setServicesData] = useState<Service[]>([]);
-  const [industriesData, setIndustriesData] = useState<Industry[]>([]);
-
-  useEffect(() => {
-    const getServices = async () => {
-      try {
-        const data = await fetchCollection<Service>("services");
-
-        setServicesData(data);
-      } catch (error) {
-        console.error("Failed to fetch services:", error);
-      }
-    };
-    const getIndustries = async () => {
-      try {
-        const data2 = await fetchCollection<Industry>("industries");
-
-        setIndustriesData(data2);
-      } catch (error) {
-        console.error("Failed to fetch industries:", error);
-      }
-    };
-    fetchSettings()
-      .then(setSettings)
-      .catch((err) => console.error("Error fetching settings:", err));
-
-    getServices();
-    getIndustries();
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  if (!settings) return null;
   const pathname = usePathname();
   const activeClass = (href: string) => {
     if (href === "/") {
@@ -57,6 +25,39 @@ export default function Header() {
     }
     return pathname.startsWith(href) ? "text-primary" : "";
   };
+
+  const [settings, setSettings] = useState<Setting | null>(null);
+
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [servicesData, setServicesData] = useState<Service[]>([]);
+  const [industriesData, setIndustriesData] = useState<Industry[]>([]);
+
+  useEffect(() => {
+    const fetchAll = async () => {
+      try {
+        const [servicesRes, industriesRes, settingsRes] = await Promise.all([
+          fetchCollection<Service>("services"),
+          fetchCollection<Industry>("industries"),
+          fetchSettings(),
+        ]);
+
+        setServicesData(servicesRes);
+        setIndustriesData(industriesRes);
+        setSettings(settingsRes);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    };
+
+    fetchAll();
+
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  if (!settings) return null;
 
   return (
     <header

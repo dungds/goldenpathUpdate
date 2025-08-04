@@ -17,13 +17,15 @@ import type { Industry } from "./lib/types/industries";
 import type { Setting } from "./lib/types/settings";
 import { fetchSettings } from "./lib/api/fetchSettings";
 export default async function Home() {
-  const faqs = await fetchFaqs();
-  const partners = await fetchPartners();
-  const about = await fetchAbout();
-  const services = await fetchCollection<Service>("services");
-  const industries = await fetchCollection<Industry>("industries");
-
-  const settings = await fetchSettings();
+  const [faqs, partners, about, services, industries, settings] =
+    await Promise.all([
+      fetchFaqs(),
+      fetchPartners(),
+      fetchAbout(),
+      fetchCollection<Service>("services"),
+      fetchCollection<Industry>("industries"),
+      fetchSettings(),
+    ]);
   return (
     <div className="">
       {settings && <HeroSection settings={settings} />}

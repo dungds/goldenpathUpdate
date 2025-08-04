@@ -8,10 +8,11 @@ import { fetchPartners } from "../lib/api/FetchImage";
 import { fetchAbout } from "../lib/api/fetchAbout";
 
 export default async function About() {
-  const faqs = await fetchFaqs();
-  const partners = await fetchPartners();
-  const about = await fetchAbout();
-  // console.log("Fetched about:", about);
+  const [faqs, partners, about] = await Promise.all([
+    fetchFaqs(),
+    fetchPartners(),
+    fetchAbout(),
+  ]);
 
   return (
     <section>

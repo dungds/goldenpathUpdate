@@ -15,12 +15,15 @@ import { Industry } from "@/app/lib/types/industries";
 export default async function ServiceDetail({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>; // params là Promise
 }) {
-  const { slug } = await Promise.resolve(params);
-  const service = await fetchItemBySlug<Service>("services", slug);
-  const servicesData = await fetchCollection<Service>("services");
-  const industries = await fetchCollection<Industry>("industries");
+  const { slug } = await params; // await params để lấy slug
+
+  const [service, servicesData, industries] = await Promise.all([
+    fetchItemBySlug<Service>("services", slug),
+    fetchCollection<Service>("services"),
+    fetchCollection<Industry>("industries"),
+  ]);
 
   if (!service) return notFound();
 

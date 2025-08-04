@@ -10,9 +10,11 @@ import type { Industry } from "@/app/lib/types/industries";
 import { fetchSettings } from "@/app/lib/api/fetchSettings";
 
 export default async function Footer() {
-  const services = await fetchCollection<Service>("services");
-  const industries = await fetchCollection<Industry>("industries");
-  const settings = await fetchSettings();
+  const [services, industries, settings] = await Promise.all([
+    fetchCollection<Service>("services"),
+    fetchCollection<Industry>("industries"),
+    fetchSettings(),
+  ]);
 
   return (
     <footer className="py-10 text-text-on-dark section-container bg-[url(/img/bg_footer.jpg)] bg-no-repeat bg-cover bg-gray-100 text-black">

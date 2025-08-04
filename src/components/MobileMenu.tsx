@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
+import { useCallback } from "react";
 
 import Link from "next/link";
 import { Icon } from "@iconify/react";
@@ -32,9 +33,9 @@ export default function MobileMenu({ services, industries }: Props) {
   const [openDropdown, setOpenDropdown] = useState<
     "industries" | "services" | null
   >(null);
-  const toggleDropdow = (name: "industries" | "services") => {
+  const toggleDropdown = useCallback((name: "industries" | "services") => {
     setOpenDropdown((prev) => (prev === name ? null : name));
-  };
+  }, []);
 
   return (
     <div className="md:hidden">
@@ -66,7 +67,7 @@ export default function MobileMenu({ services, industries }: Props) {
               className={`flex gap-0.5 px-6 items-center ${activeClass(
                 "/industries"
               )}`}
-              onClick={() => toggleDropdow("industries")}
+              onClick={() => toggleDropdown("industries")}
             >
               <span className=" text-3xl ">Industries</span>
               <Icon
@@ -112,7 +113,7 @@ export default function MobileMenu({ services, industries }: Props) {
               className={`flex gap-0.5 px-6 items-center ${activeClass(
                 "/services"
               )}`}
-              onClick={() => toggleDropdow("services")}
+              onClick={() => toggleDropdown("services")}
             >
               <span className=" text-3xl ">Services</span>
               <Icon
