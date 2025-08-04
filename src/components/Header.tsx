@@ -9,8 +9,11 @@ import { useEffect, useState } from "react";
 import { fetchCollection } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
 import type { Industry } from "@/app/lib/types/industries";
-
+import type { Setting } from "@/app/lib/types/settings";
+import { fetchSettings } from "@/app/lib/api/fetchSettings";
 export default function Header() {
+  const [settings, setSettings] = useState<Setting | null>(null);
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [servicesData, setServicesData] = useState<Service[]>([]);
   const [industriesData, setIndustriesData] = useState<Industry[]>([]);
@@ -34,6 +37,9 @@ export default function Header() {
         console.error("Failed to fetch industries:", error);
       }
     };
+    fetchSettings()
+      .then(setSettings)
+      .catch((err) => console.error("Error fetching settings:", err));
 
     getServices();
     getIndustries();
@@ -43,7 +49,7 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
+  if (!settings) return null;
   const pathname = usePathname();
   const activeClass = (href: string) => {
     if (href === "/") {
@@ -61,13 +67,15 @@ export default function Header() {
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
         <div>
           <Link href={"/"}>
-            <Image
-              src="/uploads/logo.svg"
-              className="w-24 md:w-32"
-              width={180}
-              height={55}
-              alt="logo Golden Path"
-            />
+            {settings.site_logo_url && (
+              <Image
+                src={settings.site_logo_url}
+                className="w-24 md:w-32"
+                width={180}
+                height={55}
+                alt="logo Golden Path"
+              />
+            )}
           </Link>
         </div>
         <nav className="hidden lg:space-x-16 md:space-x-6 uppercase md:flex justify-between items-center ">

@@ -7,12 +7,13 @@ import Image from "next/image";
 import { fetchCollection } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
 import type { Industry } from "@/app/lib/types/industries";
+import { fetchSettings } from "@/app/lib/api/fetchSettings";
+
 export default async function Footer() {
   const services = await fetchCollection<Service>("services");
   const industries = await fetchCollection<Industry>("industries");
-  const linkfb = socialLink.facebook;
-  const linkin = socialLink.linkedin;
-  const linkins = socialLink.instagram;
+  const settings = await fetchSettings();
+
   return (
     <footer className="py-10 text-text-on-dark section-container bg-[url(/img/bg_footer.jpg)] bg-no-repeat bg-cover bg-gray-100 text-black">
       <div
@@ -22,7 +23,7 @@ export default async function Footer() {
         <div className="flex-col flex gap-4">
           <div>
             <Image
-              src="/uploads/logo.svg"
+              src={settings.site_logo_url}
               className="w-24 md:w-32"
               width={180}
               height={55}
@@ -36,19 +37,14 @@ export default async function Footer() {
                 <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
                   <Icon icon="lets-icons:gps-fixed" className="w-6 h-6" />
                 </div>
-                <p className="md:text-lg text-left">
-                  P.O. Box: 58526, 8th Floor, City Tower-2, Sheikh Zayed Road,
-                  Dubai – UAE
-                </p>
+                <p className="md:text-lg text-left">{settings.address}</p>
               </li>
               <li className="flex gap-1 items-center">
                 <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
                   <Icon icon="mdi:email" className="text-ondark w-6 h-6" />
                 </div>
 
-                <Paragraph className="md:text-lg">
-                  admin@goldenpath.com
-                </Paragraph>
+                <Paragraph className="md:text-lg">{settings.email} </Paragraph>
               </li>
               <li className="flex gap-1 items-center">
                 <div className="w-6 h-6 flex-shrink-0 flex items-center justify-center text-ondark">
@@ -58,7 +54,7 @@ export default async function Footer() {
                   />
                 </div>
 
-                <Paragraph className="md:text-lg">03256154</Paragraph>
+                <Paragraph className="md:text-lg">{settings.phone}</Paragraph>
               </li>
             </ul>
           </div>
@@ -113,7 +109,7 @@ export default async function Footer() {
             <div className="pt-4">
               <ul className="flex gap-4 ">
                 <li>
-                  <Link href={linkfb.link}>
+                  <Link href={settings.linkedin}>
                     <Icon
                       className=" hover:text-primary border-white rounded-full p-1"
                       icon="basil:linkedin-solid"
@@ -123,7 +119,7 @@ export default async function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={linkins.link}>
+                  <Link href={settings.facebook_url}>
                     <Icon
                       className="  hover:text-primary border-white rounded-full"
                       icon="typcn:social-facebook"
@@ -133,7 +129,7 @@ export default async function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href={linkins.link}>
+                  <Link href={settings.youtube}>
                     <Icon
                       className=" p-1  border-white rounded-full hover:text-primary"
                       icon="famicons:logo-instagram"

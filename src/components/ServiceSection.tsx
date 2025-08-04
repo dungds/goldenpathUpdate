@@ -55,14 +55,16 @@ export default function ServiceSection({ services }: Props) {
                   }`}
                 >
                   <div className=" w-full ">
-                    <Image
-                      src={selected.section1_image}
-                      alt={service.section1_description}
-                      unoptimized
-                      width={1000}
-                      height={600}
-                      className="   w-full h-auto"
-                    />
+                    {selected.section1_image && (
+                      <Image
+                        src={selected.section1_image}
+                        alt={service.section1_description}
+                        unoptimized
+                        width={1000}
+                        height={600}
+                        className="   w-full h-auto"
+                      />
+                    )}
                   </div>
                   <div>
                     <Paragraph className="mb-4 line-clamp-5 px-4">
@@ -101,12 +103,14 @@ export default function ServiceSection({ services }: Props) {
             <Button href={`/services/${selected.id}`}>Explore</Button>
           </div>
           <div className="relative w-full">
-            <Image
-              src={selected.section1_image}
-              alt="image services"
-              fill
-              className="object-cover rounded-lg"
-            />
+            {selected.section1_image && (
+              <Image
+                src={selected.section1_image}
+                alt="image services"
+                fill
+                className="object-cover rounded-lg"
+              />
+            )}
           </div>
         </div>
       </div>

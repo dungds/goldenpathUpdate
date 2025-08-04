@@ -32,13 +32,15 @@ export default async function IndustryDetail({
     <section>
       <section className="pt-4 md:pt-6 grid grid-cols-1 md:grid-cols-2 section-container gap-4 md:gap-8 lg:gap-12">
         <div>
-          <Image
-            src={industry.section1_image}
-            alt="image service"
-            loading="lazy"
-            height={400}
-            width={600}
-          />
+          {industry.section1_image && (
+            <Image
+              src={industry.section1_image}
+              alt="image service"
+              loading="lazy"
+              height={400}
+              width={600}
+            />
+          )}
         </div>
         <div className="text-text-on-dark flex flex-col gap-4 md:gap-6 md:pyy-14 py-6 pb-10 ">
           <H2 className="text-3xl md:text-4xl lg:text-5xl">{industry.name}</H2>

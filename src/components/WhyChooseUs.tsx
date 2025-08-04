@@ -24,14 +24,16 @@ export default function WhyChooseUs({ About }: Props) {
               alt=""
             />
 
-            <Image
-              src={About.section3.image}
-              width={555}
-              height={570}
-              alt="why choose us image"
-              className="max-h-[500px] w-full h-auto object-contain relative  top-0"
-              priority
-            />
+            {About.section3.image && (
+              <Image
+                src={About.section3.image}
+                width={555}
+                height={570}
+                alt="why choose us image"
+                className="max-h-[500px] w-full h-auto object-contain relative  top-0"
+                priority
+              />
+            )}
           </div>
 
           {/* Cột text (trái) */}

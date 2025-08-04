@@ -14,6 +14,8 @@ import { fetchPartners } from "./lib/api/FetchImage";
 import type { Service } from "./lib/types/services";
 import { fetchAbout } from "./lib/api/fetchAbout";
 import type { Industry } from "./lib/types/industries";
+import type { Setting } from "./lib/types/settings";
+import { fetchSettings } from "./lib/api/fetchSettings";
 export default async function Home() {
   const faqs = await fetchFaqs();
   const partners = await fetchPartners();
@@ -21,9 +23,10 @@ export default async function Home() {
   const services = await fetchCollection<Service>("services");
   const industries = await fetchCollection<Industry>("industries");
 
+  const settings = await fetchSettings();
   return (
     <div className="">
-      <HeroSection />
+      {settings && <HeroSection settings={settings} />}
       <ServiceSection services={services} />
       <WhyChooseUs About={about} />
       <PartnerSlider partners={partners} />

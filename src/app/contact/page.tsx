@@ -1,21 +1,25 @@
 "use client";
 import { H2, H3, H4, Paragraph } from "@/components/ui";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui";
-import { socialLink } from "@/lib/data";
 import Link from "next/link";
+import type { Setting } from "../lib/types/settings";
 
-const linkfb = socialLink.facebook;
-const linkin = socialLink.linkedin;
-const linkins = socialLink.instagram;
+import { fetchSettings } from "../lib/api/fetchSettings";
+
 export default function Contact() {
+  const [settings, setSettings] = useState<Setting | null>(null);
+  useEffect(() => {
+    fetchSettings().then(setSettings).catch(console.error);
+  }, []);
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
+  if (!settings) return null;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -53,8 +57,7 @@ export default function Contact() {
                     <Icon icon="lets-icons:gps-fixed" className="w-6 h-6" />
                   </div>
                   <Paragraph className="text-dark-muted md:text-lg text-text-">
-                    P.O. Box: 58526, 8th Floor, City Tower-2, Sheikh Zayed Road,
-                    Dubai – UAE
+                    {settings.address}
                   </Paragraph>
                 </li>
                 <li className="flex gap-1 items-center py-2 ">
@@ -63,7 +66,7 @@ export default function Contact() {
                   </div>
 
                   <Paragraph className="text-dark-muted md:text-lg">
-                    admin@goldenpath.com
+                    {settings.email}
                   </Paragraph>
                 </li>
                 <li className="flex gap-1 items-center py-2 ">
@@ -75,7 +78,7 @@ export default function Contact() {
                   </div>
 
                   <Paragraph className="text-text-muted md:text-lg">
-                    03256154
+                    {settings.phone}
                   </Paragraph>
                 </li>
               </ul>
@@ -88,7 +91,7 @@ export default function Contact() {
               <div className="pt-4">
                 <ul className="flex gap-4 ">
                   <li>
-                    <Link href={linkin.link}>
+                    <Link href={settings.linkedin}>
                       <Icon
                         className="border   hover:text-primary border-gray-400  rounded-full p-3"
                         icon="basil:linkedin-solid"
@@ -98,7 +101,7 @@ export default function Contact() {
                     </Link>
                   </li>
                   <li>
-                    <Link href={linkfb.link}>
+                    <Link href={settings.facebook_url}>
                       <Icon
                         className="border  p-3  hover:text-primary border-gray-400  rounded-full"
                         icon="typcn:social-facebook"
@@ -108,7 +111,7 @@ export default function Contact() {
                     </Link>
                   </li>
                   <li>
-                    <Link href={linkins.link}>
+                    <Link href={settings.youtube}>
                       <Icon
                         className="border p-3  border-gray-400 rounded-full hover:text-primary"
                         icon="famicons:logo-instagram"
