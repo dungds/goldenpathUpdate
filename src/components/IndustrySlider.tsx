@@ -8,9 +8,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Icon } from "@iconify/react";
 import { industries } from "@/lib/data";
+import { stripHtml } from "string-strip-html";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
+import type { Industry } from "@/app/lib/types/industries";
+type Props = {
+  industries: Industry[];
+};
 
-export default function IndustrySlider() {
+export default function IndustrySlider({ industries }: Props) {
   // trong component
 
   return (
@@ -43,7 +48,7 @@ export default function IndustrySlider() {
             <SwiperSlide key={industry.id}>
               <div
                 className="relative bg-cover bg-no-repeat cursor-grab  p-4 pb-8 text-white h-80  md:h-96 flex flex-col justify-between group ition-all duration-300 ease-in-out"
-                style={{ backgroundImage: `url(${industry.image})` }}
+                style={{ backgroundImage: `url(${industry.section1_image})` }}
               >
                 <div
                   className="absolute inset-0 bg-black/50 z-0 md:group-hover:bg-primary/90 md:group-hover: transition-colors     transition-timing-function: cubic-bezier(.4,0,.2,1);
@@ -54,9 +59,9 @@ export default function IndustrySlider() {
     transition-duration: 300; md:group-hover:text-text-primary"
                 >
                   <div>
-                    <H3 className="text-2xl font-semibold">{industry.title}</H3>
-                    <Paragraph className="text-base mt-2 line-clamp-3">
-                      {industry.description}
+                    <H3 className="text-2xl font-semibold">{industry.name}</H3>
+                    <Paragraph className=" text-base mt-2 line-clamp-3">
+                      {stripHtml(industry.section1_description).result}
                     </Paragraph>
                   </div>
 

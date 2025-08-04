@@ -5,8 +5,8 @@ import { usePathname } from "next/navigation";
 
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import { industries } from "@/lib/data";
 import type { Service } from "@/app/lib/types/services";
+import type { Industry } from "@/app/lib/types/industries";
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -15,8 +15,11 @@ const menuItems = [
   { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
-
-export default function MobileMenu({ Services }: { Services: Service[] }) {
+type Props = {
+  services: Service[];
+  industries: Industry[];
+};
+export default function MobileMenu({ services, industries }: Props) {
   const pathname = usePathname();
   const activeClass = (href: string) => {
     if (href === "/") {
@@ -82,12 +85,12 @@ export default function MobileMenu({ Services }: { Services: Service[] }) {
                   transition={{ duration: 0.2, ease: "easeInOut" }}
                   initial={{ height: 0 }}
                   animate={{ height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
+                  exit={{ height: 0 }}
                   className="flex flex-col gap-2 text-xl mt-2 py-4 bg-background-secondary overflow-hidden"
                 >
                   {industries.map((item) => (
                     <Link
-                      href={`/industries/${item.id}`}
+                      href={`/industries/${item.slug}`}
                       key={item.id}
                       onClick={() => {
                         setIsOpen(false);
@@ -95,7 +98,7 @@ export default function MobileMenu({ Services }: { Services: Service[] }) {
                       }}
                       className="px-4 pl-10 py-2"
                     >
-                      {item.title}
+                      {item.name}
                     </Link>
                   ))}
                 </motion.div>
@@ -131,9 +134,9 @@ export default function MobileMenu({ Services }: { Services: Service[] }) {
                   exit={{ opacity: 0, height: 0 }}
                   className="flex flex-col gap-2 text-xl mt-2 bg-background-secondary overflow-hidden py-4"
                 >
-                  {Services.map((item) => (
+                  {services.map((item) => (
                     <Link
-                      href={`/services/${item.id}`}
+                      href={`/services/${item.slug}`}
                       key={item.id}
                       onClick={() => {
                         setIsOpen(false);

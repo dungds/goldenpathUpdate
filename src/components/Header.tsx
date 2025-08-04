@@ -5,31 +5,43 @@ import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
-import { industries } from "@/lib/data";
 import { useEffect, useState } from "react";
 import { fetchCollection } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
+import type { Industry } from "@/app/lib/types/industries";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [services, setServices] = useState<Service[]>([]);
+  const [servicesData, setServicesData] = useState<Service[]>([]);
+  const [industriesData, setIndustriesData] = useState<Industry[]>([]);
 
   useEffect(() => {
     const getServices = async () => {
       try {
         const data = await fetchCollection<Service>("services");
-        setServices(data);
+
+        setServicesData(data);
       } catch (error) {
         console.error("Failed to fetch services:", error);
       }
     };
+    const getIndustries = async () => {
+      try {
+        const data2 = await fetchCollection<Industry>("industries");
+
+        setIndustriesData(data2);
+      } catch (error) {
+        console.error("Failed to fetch industries:", error);
+      }
+    };
 
     getServices();
+    getIndustries();
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("croll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const pathname = usePathname();
@@ -43,7 +55,7 @@ export default function Header() {
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 bg-background-inverse text-text-on-dark section-container ${
-        isScrolled ? "" : ""
+        isScrolled ? "shadow" : ""
       }`}
     >
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
@@ -77,13 +89,13 @@ export default function Header() {
               />
             </div>
             <div className="absolute top-6 hidden transition-all duration-300 ease-in-out group-hover:flex flex-col bg-background py-2 z-50 text-text-muted rounded-md capitalize  w-auto shadow-lg">
-              {industries.map((industry) => (
+              {industriesData.map((industry) => (
                 <Link
                   key={industry.id}
-                  href={`/industries/${industry.id}`}
-                  className="px-4 py-2 hover:text-primary-dark   whitespace-nowrap"
+                  href={`/industries/${industry.slug}`}
+                  className="px-4 py-2 hover:text-primary-dark  whitespace-nowrap"
                 >
-                  {industry.title}
+                  {industry.name}
                 </Link>
               ))}
             </div>
@@ -103,7 +115,7 @@ export default function Header() {
               />
             </div>
             <div className="absolute top-6 hidden transition-all duration-300 ease-in-out group-hover:flex flex-col bg-background py-2 z-50 text-text-muted rounded-md capitalize  w-auto shadow-lg">
-              {services.map((service) => (
+              {servicesData.map((service) => (
                 <Link
                   key={service.id}
                   href={`/services/${service.slug}`}
@@ -124,7 +136,7 @@ export default function Header() {
             Contact
           </Link>
         </nav>
-        <MobileMenu Services={services} />
+        <MobileMenu services={servicesData} industries={industriesData} />
       </div>
     </header>
   );

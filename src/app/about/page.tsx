@@ -31,14 +31,16 @@ export default async function About() {
       </section>
       <section className="relative bg-background-neutral">
         <div className="md:section-container -translate-y-10 flex justify-center">
-          <Image
-            className=""
-            src={about.section2.image}
-            width={2100}
-            height={945}
-            layout="reponsive"
-            alt="about us banner"
-          />
+          {about.section2.image && (
+            <Image
+              src={about.section2.image}
+              width={2100}
+              height={945}
+              layout="reponsive"
+              alt="about us banner"
+              loading="lazy"
+            />
+          )}
         </div>
         <div className="-mt-10 gap-8 py-8 pb-14 md:py-10 md:pb-20 grid grid-cols-1 md:grid-cols-2 section-container ">
           <div className="md:pt-14 ">
@@ -46,7 +48,7 @@ export default async function About() {
 
             {about.section2.description && (
               <div
-                className="prose pt-2 md:text-xl md:pt-6"
+                className="prose pt-2 md:text-xl md:pt-6 text-justify"
                 dangerouslySetInnerHTML={{
                   __html: about.section2.description,
                 }}
@@ -71,30 +73,34 @@ export default async function About() {
       </section>
       <section className="grid grid-cols-1 md:grid-cols-2 md:gap-4 lg:gap-10">
         <div className="relative">
-          <Image
-            src={about.section3.image}
-            className="md:object-cover w-auto"
-            fill
-            priority
-            alt="banner about us 2"
-          />
+          {about.section3.image && (
+            <Image
+              src={about.section3.image}
+              loading="lazy"
+              className="md:object-cover w-auto"
+              fill
+              alt="banner about us 2"
+            />
+          )}
         </div>
         <div className="relative md:hidden">
-          <Image
-            src={about.section3.image}
-            width={600}
-            height={300}
-            className="w-full h-auto object-cover "
-            priority
-            alt="banner about us 2"
-          />
+          {about.section3.image && (
+            <Image
+              src={about.section3.image}
+              width={600}
+              height={300}
+              loading="lazy"
+              className="w-full h-auto object-cover "
+              alt="banner about us 2"
+            />
+          )}
         </div>
         <div className="text-text-on-dark md:py-10 p-4 flex flex-col gap-4 lg:py-16 py-10 md:pr-10 lg:pr-20">
           <H2 className="lg:text-5xl ">{about.section3.title}</H2>
 
           {about.section3.description && (
             <div
-              className="prose"
+              className="prose text-justify"
               dangerouslySetInnerHTML={{
                 __html: about.section3.description,
               }}

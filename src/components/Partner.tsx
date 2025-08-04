@@ -39,13 +39,15 @@ export default function PartnerSlider({ partners }: Props) {
         {partners.map((partner) => (
           <SwiperSlide key={partner.id}>
             <div className=" relative">
-              <Image
-                src={partner.logo}
-                width={200}
-                height={200}
-                alt="partner logo"
-                className="object-contain"
-              />
+              {partner.logo && (
+                <Image
+                  src={partner.logo}
+                  width={200}
+                  height={200}
+                  alt="partner logo"
+                  className="object-contain"
+                />
+              )}
             </div>
           </SwiperSlide>
         ))}

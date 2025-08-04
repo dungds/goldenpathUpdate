@@ -1,51 +1,52 @@
 import { use } from "react";
 import Image from "next/image";
+import { services, industries } from "@/lib/data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
+import FaqSection from "@/components/FraSection";
 import ServiceSection from "@/components/ServiceSection";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
-import type { Service } from "@/app/lib/types/services";
-import {
-  fetchItemBySlug,
-  fetchCollection,
-} from "@/app/lib/api/fetchCollection";
+import { useState } from "react";
 import ConsultationForm from "@/components/ConsultationForm";
-import { Industry } from "@/app/lib/types/industries";
-export default async function ServiceDetail({
+import type { Industry } from "@/app/lib/types/industries";
+import {
+  fetchCollection,
+  fetchItemBySlug,
+} from "@/app/lib/api/fetchCollection";
+import type { Service } from "@/app/lib/types/services";
+
+export default async function IndustryDetail({
   params,
 }: {
   params: { slug: string };
 }) {
   const { slug } = await Promise.resolve(params);
-  const service = await fetchItemBySlug<Service>("services", slug);
-  const servicesData = await fetchCollection<Service>("services");
-  const industries = await fetchCollection<Industry>("industries");
+  const industry = await fetchItemBySlug<Industry>("industries", slug);
+  const services = await fetchCollection<Service>("services");
+  const industryData = await fetchCollection<Industry>("industries");
 
-  if (!service) return notFound();
+  if (!industry) return notFound();
 
   return (
     <section>
       <section className="pt-4 md:pt-6 grid grid-cols-1 md:grid-cols-2 section-container gap-4 md:gap-8 lg:gap-12">
         <div>
-          {service.section1_image && (
-            <Image
-              src={service.section1_image}
-              alt="image service"
-              height={400}
-              width={600}
-              loading="lazy"
-            />
-          )}
+          <Image
+            src={industry.section1_image}
+            alt="image service"
+            loading="lazy"
+            height={400}
+            width={600}
+          />
         </div>
         <div className="text-text-on-dark flex flex-col gap-4 md:gap-6 md:pyy-14 py-6 pb-10 ">
-          <H2 className="text-3xl md:text-4xl lg:text-5xl">{service.name}</H2>
-
-          {service.section1_description && (
+          <H2 className="text-3xl md:text-4xl lg:text-5xl">{industry.name}</H2>
+          {industry.section1_description && (
             <div
               className="prose md:text-lg lg:text-xl"
               dangerouslySetInnerHTML={{
-                __html: service.section1_description,
+                __html: industry.section1_description,
               }}
             />
           )}
@@ -53,20 +54,19 @@ export default async function ServiceDetail({
       </section>
 
       <section className="grid grid-cols-1 md:grid-cols-2">
-        <div className="bg-background-neutral px-4  py-10 md:px-10 lg:px-20 md:py-16">
-          <H2 className="pb-4">{service.section2_title} </H2>
-
-          {service.section2_description && (
+        <div className="bg-background-neutral px-4 py-10 md:py-16 md:px-10 lg:px-20">
+          <H2 className="pb-4">{industry.section2_title} </H2>
+          {industry.section2_description && (
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: service.section1_description,
+                __html: industry.section1_description,
               }}
             />
           )}
         </div>
-        <div className="bg-primary px-4 py-10 md:px-10 md:py-16 lg:px-20">
-          <div className="pb-4">
+        <div className="bg-primary px-4 py-10 md:py-16  md:px-10 lg:px-20">
+          <div className="pb-4 ">
             <Paragraph className="text-lg font-medium ">
               Ready to expand in Dubai and the UAE? Our expert advice helps you
               make the right decisions for lasting growth.
@@ -80,11 +80,12 @@ export default async function ServiceDetail({
         <div className=" gap-4 md:gap-8 pt-14 md:pt-20  md:py-10  grid grid-cols-1 md:grid-cols-2 md:section-container  ">
           <div className="px-4 md:px-0">
             <H2 className="lg:text-5xl text-text-on-dark">
-              {service.section3_main_title}
+              {" "}
+              {industry.section3_main_title}{" "}
             </H2>
             <ul className="text-text-on-dark py-6 md:py-10 flex flex-col gap-4 ">
               {(
-                service.section3_list as unknown as {
+                industry.section3_list as unknown as {
                   title: string;
                   section3_description: string;
                 }[]
@@ -97,7 +98,7 @@ export default async function ServiceDetail({
                       <div
                         className="prose text-text-dark-muted pt-1"
                         dangerouslySetInnerHTML={{
-                          __html: service.section1_description,
+                          __html: industry.section1_description,
                         }}
                       />
                     )}
@@ -116,14 +117,14 @@ export default async function ServiceDetail({
                 height={120}
                 loading="lazy"
               />
-              {service.section3_image && (
+              {industry.section3_image && (
                 <Image
-                  src={service.section3_image}
+                  src={industry.section3_image}
                   width={600}
                   height={300}
                   className=" w-full max-w-[500px] h-auto object-cover "
-                  loading="lazy"
                   alt="banner about us 2"
+                  loading="lazy"
                 />
               )}
             </div>
@@ -132,25 +133,25 @@ export default async function ServiceDetail({
       </section>
       <section className="md:section-container bg-background-neutral grid grid-cols-1 md:grid-cols-2 pt-10 md:gap-4 lg:gap-10 md:py-20">
         <div className="flex md:justify-self-center order-2 md:order-1">
-          {service.section4_image && (
+          {industry.section4_image && (
             <Image
-              src={service.section4_image}
+              src={industry.section4_image}
+              loading="lazy"
               width={600}
               height={300}
               className="w-full h-auto object-cover "
-              loading="lazy"
               alt="banner about us 2"
             />
           )}
         </div>
         <div className="order-1 md:order-2 text-text-primary md:py-10  px-4 flex flex-col gap-4 lg:py-16 pb-10 ">
-          <H2 className="lg:text-5xl ">{service.section4_title}</H2>
+          <H2 className="lg:text-5xl ">{industry.section4_title}</H2>
 
-          {service.section4_description && (
+          {industry.section4_description && (
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: service.section1_description,
+                __html: industry.section1_description,
               }}
             />
           )}
@@ -171,12 +172,12 @@ export default async function ServiceDetail({
           </Button>
         </div>
       </section>
-      <ServiceSection services={servicesData} />
+      <ServiceSection services={services} />
 
       <section className="py-8 md:py-14 bg-background-neutral section-container">
         <H2 className="md:pb-4">Industries</H2>
         <ul className=" py-4 flex gap-2 flex-wrap">
-          {industries.map((industry) => (
+          {industryData.map((industry) => (
             <li
               className=" bg-background hover:bg-primary font-semibold px-8 py-4 md:px-16 md:py-4 rounded-sm"
               key={industry.id}

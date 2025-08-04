@@ -5,8 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { services, Service } from "@/lib/data";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
+import type { About } from "@/app/lib/types/about";
+type Props = {
+  About: About;
+};
 
-export default function WhyChooseUs() {
+export default function WhyChooseUs({ About }: Props) {
   return (
     <section className=" bg-background   text-text-on-dark relative pt-10 md:pt-20 md:pb-10">
       <div className="  ">
@@ -21,7 +25,7 @@ export default function WhyChooseUs() {
             />
 
             <Image
-              src="/whychoose.jpg"
+              src={About.section3.image}
               width={555}
               height={570}
               alt="why choose us image"
@@ -33,20 +37,18 @@ export default function WhyChooseUs() {
           {/* Cột text (trái) */}
           <div className="px-4 md:pt-10   md:order-2 order-1  z-10  ">
             <div className="">
-              <H2 className="border-l-4 border-primary pl-6 ">Why choose us</H2>
-              <Paragraph className="py-6">
-                If you’re updating processes, addressing company culture issues,
-                or creating a new business plan, expert consultancy services are
-                essential. Working with top consultants in Dubai helps you adapt
-                to market changes, reduce downtime, and stay competitive.
-                <br />
-                <br />
-                Our tailored solutions support everything from small
-                improvements to major transformations. Our experienced
-                consultants in the UAE focus on your success, expertly guiding
-                complex projects and collaborating effectively across business
-                and technology teams.
-              </Paragraph>
+              <H2 className="border-l-4 border-primary pl-6 ">
+                {About.section3.title}
+              </H2>
+              {About.section3.description && (
+                <div
+                  className="prose py-6 text-justify"
+                  dangerouslySetInnerHTML={{
+                    __html: About.section3.description,
+                  }}
+                />
+              )}
+
               <Button href="/about">More Information</Button>
             </div>
           </div>

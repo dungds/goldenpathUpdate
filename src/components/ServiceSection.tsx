@@ -5,13 +5,13 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import type { Service } from "@/app/lib/types/services";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
-import { fetchCollection } from "@/app/lib/api/fetchCollection";
+import { stripHtml } from "string-strip-html";
 type Props = {
   services: Service[];
 };
 
-export default async function ServiceSection({ services }: Props) {
-  const [selected, setSelected] = useState<Service>(services[0]);
+export default function ServiceSection({ services }: Props) {
+  const [selected, setSelected] = useState<Service>(services[0] ?? null);
 
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -56,7 +56,7 @@ export default async function ServiceSection({ services }: Props) {
                 >
                   <div className=" w-full ">
                     <Image
-                      src={""}
+                      src={selected.section1_image}
                       alt={service.section1_description}
                       unoptimized
                       width={1000}
@@ -66,8 +66,9 @@ export default async function ServiceSection({ services }: Props) {
                   </div>
                   <div>
                     <Paragraph className="mb-4 line-clamp-5 px-4">
-                      {service.section1_description}
+                      {stripHtml(selected.section1_description).result}
                     </Paragraph>
+
                     <div className="text-right">
                       <Button
                         className="bg-background-neutral text-primary "
@@ -91,17 +92,18 @@ export default async function ServiceSection({ services }: Props) {
         <div className="bg-background p-6 lg:p-12 space-y-6  grid-cols-1 md:grid-cols-2 gap-8 hidden md:grid">
           <div className="">
             <H3 className="text-2xl md:text-3xl font-medium underline underline-offset-4">
-              {selected.title}
+              {selected.name}
             </H3>
             <Paragraph className="my-6 md:line-clamp-[10]">
-              {selected.description}
+              {stripHtml(selected.section1_description).result}
             </Paragraph>
+
             <Button href={`/services/${selected.id}`}>Explore</Button>
           </div>
           <div className="relative w-full">
             <Image
-              src={selected.image}
-              alt={selected.title}
+              src={selected.section1_image}
+              alt="image services"
               fill
               className="object-cover rounded-lg"
             />

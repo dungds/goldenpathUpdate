@@ -6,9 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { fetchCollection } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
+import type { Industry } from "@/app/lib/types/industries";
 export default async function Footer() {
   const services = await fetchCollection<Service>("services");
-
+  const industries = await fetchCollection<Industry>("industries");
   const linkfb = socialLink.facebook;
   const linkin = socialLink.linkedin;
   const linkins = socialLink.instagram;
@@ -73,7 +74,7 @@ export default async function Footer() {
                   key={industry.id}
                   className="flex gap-1 items-center hover:text-primary"
                 >
-                  <Link href={industry.slug}> {industry.title}</Link>
+                  <Link href={industry.slug}> {industry.name}</Link>
                 </li>
               ))}
             </ul>

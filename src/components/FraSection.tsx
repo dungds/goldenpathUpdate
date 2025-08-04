@@ -44,7 +44,7 @@ export default function FaqSection({ faqs }: { faqs: Faq[] }) {
 
               <div
                 className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                  isOpen ? "max-h-96 opacity-100 mt-4" : "max-h-0 opacity-0"
+                  isOpen ? "max-h-96  mt-4" : "max-h-0 "
                 }`}
               >
                 <div className="mb-2 text-text-muted">{faq.answer}</div>

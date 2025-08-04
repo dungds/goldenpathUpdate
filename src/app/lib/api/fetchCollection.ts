@@ -1,4 +1,3 @@
-import type { Service } from "../types/services";
 export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
