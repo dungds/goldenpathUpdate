@@ -143,10 +143,12 @@ export default function Contact() {
               <input
                 onChange={handleChange}
                 placeholder="Name"
+                name="name"
                 value={form.name}
                 className="w-full bg-background-light p-2 border border-gray-300  focus:border-primary focus:outline-none text-text-primary"
               />
               <input
+                name="email"
                 onChange={handleChange}
                 placeholder="Email*"
                 value={form.email}
@@ -155,6 +157,7 @@ export default function Contact() {
               <input
                 onChange={handleChange}
                 placeholder="Phone"
+                name="phone"
                 value={form.phone}
                 className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
               />

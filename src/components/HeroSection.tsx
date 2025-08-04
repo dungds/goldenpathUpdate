@@ -1,8 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
 import { H1, Paragraph, Button, H3 } from "@/components/ui";
-import { banners } from "@/lib/data";
-import { fetchSettings } from "@/app/lib/api/fetchSettings";
 import type { Setting } from "@/app/lib/types/settings";
 export default function HeroSection({ settings }: { settings: Setting }) {
   return (
@@ -21,7 +18,7 @@ export default function HeroSection({ settings }: { settings: Setting }) {
           <div className=" relative inset-0 ">
             {settings.main_banner_url && (
               <Image
-                src={`${process.env.NEXT_PUBLIC_BE_URL}${settings.main_banner_url}`}
+                src={settings.main_banner_url}
                 alt="Hero Banner"
                 fill={false}
                 width={800}

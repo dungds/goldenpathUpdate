@@ -1,7 +1,7 @@
 export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-  const res = await fetch(`${baseUrl}/${endpoint}`, {
+  const res = await fetch(`${baseUrl}/api/${endpoint}`, {
     cache: "no-store",
   });
 
@@ -12,7 +12,7 @@ export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
 
 export async function fetchItemBySlug<T>(endpoint: string, slug: string): Promise<T> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${baseUrl}/${endpoint}/${slug}`, {
+  const res = await fetch(`${baseUrl}/api/${endpoint}/${slug}`, {
     cache: "no-store",
   });
 

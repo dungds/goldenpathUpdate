@@ -74,7 +74,7 @@ export default function ServiceSection({ services }: Props) {
                     <div className="text-right">
                       <Button
                         className="bg-background-neutral text-primary "
-                        href={`/services/${service.id}`}
+                        href={`/services/${service.slug}`}
                       >
                         Explore
                         <Icon
@@ -100,7 +100,7 @@ export default function ServiceSection({ services }: Props) {
               {stripHtml(selected.section1_description).result}
             </Paragraph>
 
-            <Button href={`/services/${selected.id}`}>Explore</Button>
+            <Button href={`/services/${selected.slug}`}>Explore</Button>
           </div>
           <div className="relative w-full">
             {selected.section1_image && (

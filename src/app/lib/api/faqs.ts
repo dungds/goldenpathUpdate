@@ -6,7 +6,7 @@ export async function fetchFaqs(): Promise<Faq[]> {
     throw new Error("API URL is not defined");
   }
 
-  const res = await fetch(`${baseUrl}/faqs`, {
+  const res = await fetch(`${baseUrl}/api/faqs`, {
     cache: "no-store",
   });
 
