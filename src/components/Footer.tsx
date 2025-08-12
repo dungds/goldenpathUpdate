@@ -24,13 +24,15 @@ export default async function Footer() {
       >
         <div className="flex-col flex gap-4">
           <div>
-            <Image
-              src={settings.site_logo_url}
-              className="w-24 md:w-32"
-              width={180}
-              height={55}
-              alt="logo Golden Path"
-            />
+            {settings.site_logo_url && (
+              <Image
+                src={settings.site_logo_url}
+                className="w-24 md:w-32"
+                width={180}
+                height={55}
+                alt="logo Golden Path"
+              />
+            )}
           </div>
 
           <div>
@@ -67,14 +69,16 @@ export default async function Footer() {
           </div>
           <div>
             <ul className="flex-col flex gap-2 font-light">
-              {industries.map((industry) => (
-                <li
-                  key={industry.id}
-                  className="flex gap-1 items-center hover:text-primary"
-                >
-                  <Link href={industry.slug}> {industry.name}</Link>
-                </li>
-              ))}
+              {industries.map((industry) =>
+                industry.slug ? (
+                  <li
+                    key={industry.id}
+                    className="flex gap-1 items-center hover:text-primary"
+                  >
+                    <Link href={industry.slug}> {industry.name}</Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           </div>
         </div>
@@ -84,14 +88,16 @@ export default async function Footer() {
           </div>
           <div>
             <ul className="flex-col flex gap-2 font-light">
-              {services.map((service) => (
-                <li
-                  key={service.id}
-                  className="flex gap-1 items-center hover:text-primary"
-                >
-                  <Link href={service.slug}> {service.name}</Link>
-                </li>
-              ))}
+              {services.map((service) =>
+                service.slug ? (
+                  <li
+                    key={service.id}
+                    className="flex gap-1 items-center hover:text-primary"
+                  >
+                    <Link href={service.slug}> {service.name}</Link>
+                  </li>
+                ) : null
+              )}
             </ul>
           </div>
         </div>
@@ -111,34 +117,40 @@ export default async function Footer() {
             <div className="pt-4">
               <ul className="flex gap-4 ">
                 <li>
-                  <Link href={settings.linkedin}>
-                    <Icon
-                      className=" hover:text-primary border-white rounded-full p-1"
-                      icon="basil:linkedin-solid"
-                      width="30"
-                      height="30"
-                    />
-                  </Link>
+                  {settings.linkedin && (
+                    <Link href={settings.linkedin}>
+                      <Icon
+                        className=" hover:text-primary border-white rounded-full p-1"
+                        icon="basil:linkedin-solid"
+                        width="30"
+                        height="30"
+                      />
+                    </Link>
+                  )}
                 </li>
                 <li>
-                  <Link href={settings.facebook_url}>
-                    <Icon
-                      className="  hover:text-primary border-white rounded-full"
-                      icon="typcn:social-facebook"
-                      width="30"
-                      height="30"
-                    />
-                  </Link>
+                  {settings.facebook_url && (
+                    <Link href={settings.facebook_url}>
+                      <Icon
+                        className="  hover:text-primary border-white rounded-full"
+                        icon="typcn:social-facebook"
+                        width="30"
+                        height="30"
+                      />
+                    </Link>
+                  )}
                 </li>
                 <li>
-                  <Link href={settings.youtube}>
-                    <Icon
-                      className=" p-1  border-white rounded-full hover:text-primary"
-                      icon="famicons:logo-instagram"
-                      width="30"
-                      height="30"
-                    />
-                  </Link>
+                  {settings.youtube && (
+                    <Link href={settings.youtube}>
+                      <Icon
+                        className=" p-1  border-white rounded-full hover:text-primary"
+                        icon="famicons:logo-instagram"
+                        width="30"
+                        height="30"
+                      />
+                    </Link>
+                  )}
                 </li>
               </ul>
             </div>

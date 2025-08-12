@@ -112,6 +112,7 @@ export default async function About() {
 
       <PartnerSlider partners={partners} />
       <ContactForm />
+
       <FaqSection faqs={faqs} />
     </section>
   );

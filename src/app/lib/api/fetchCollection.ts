@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation';
+
 export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
     const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -16,7 +18,10 @@ export async function fetchItemBySlug<T>(endpoint: string, slug: string): Promis
     cache: "no-store",
   });
 
-  if (!res.ok) throw new Error(`Failed to fetch ${endpoint}/${slug}`);
+  if (!res.ok) {
+    // Nếu API trả lỗi -> điều hướng 404
+    notFound();
+  }
   const data = await res.json();
   return data.data;
 }

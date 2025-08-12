@@ -1,3 +1,4 @@
+import { log } from "console";
 import type { Setting } from "../types/settings";
 export async function fetchSettings():Promise<Setting> {
           const baseUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -10,5 +11,7 @@ export async function fetchSettings():Promise<Setting> {
     throw new Error("Failed to fetch settings");
   }
 
-  return res.json();
+    const json = await res.json(); 
+
+  return json.original;
 }

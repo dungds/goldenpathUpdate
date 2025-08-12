@@ -15,5 +15,9 @@ export async function fetchFaqs(): Promise<Faq[]> {
   }
 
   const data = await res.json();
-  return data.data;
+
+
+
+  return data;
+
 }

@@ -5,7 +5,11 @@ import { H2, Paragraph } from "@/components/ui";
 import { Icon } from "@iconify/react";
 import type { Faq } from "@/app/lib/types/faqs";
 
-export default function FaqSection({ faqs }: { faqs: Faq[] }) {
+export default function FaqSection({ faqs = [] }: { faqs?: Faq[] }) {
+  if (!faqs || faqs.length === 0) {
+    return <div>No FAQs found</div>;
+  }
+
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {

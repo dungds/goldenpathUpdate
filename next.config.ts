@@ -4,12 +4,12 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'http',
-        hostname: '127.0.0.1',
+        hostname: 'localhost',
         port: '8000',
-        pathname: '/**',
+        pathname: '/storage/**',
       },
     ],
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

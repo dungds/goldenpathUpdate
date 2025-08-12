@@ -16,7 +16,7 @@ import { industries } from "@/lib/data";
 type Props = {
   partners: LogoPartner[];
 };
-export default function PartnerSlider({ partners }: Props) {
+export default function PartnerSlider({ partners = [] }: Props) {
   return (
     <section className="bg-background  lg:px-40 px-6 py-6 md:py-14">
       <Swiper
