@@ -6,19 +6,25 @@ import { Icon } from "@iconify/react";
 import MobileMenu from "./MobileMenu";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { fetchCollection } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
 import type { Industry } from "@/app/lib/types/industries";
 import type { Setting } from "@/app/lib/types/settings";
-import { fetchSettings } from "@/app/lib/api/fetchSettings";
 import { asyncWrapProviders } from "async_hooks";
-export type NavigationData = {
+
+type HeaderProps = {
+  settings: Setting;
   services: Service[];
   industries: Industry[];
-  settings: Setting;
 };
-export default function Header() {
+
+export default function Header({
+  settings,
+  services,
+  industries,
+}: HeaderProps) {
   const pathname = usePathname();
+  // console.log(settings);
+
   const activeClass = (href: string) => {
     if (href === "/") {
       return pathname === "/" ? "text-primary" : "";
@@ -26,31 +32,9 @@ export default function Header() {
     return pathname.startsWith(href) ? "text-primary" : "";
   };
 
-  const [settings, setSettings] = useState<Setting | null>(null);
-
   const [isScrolled, setIsScrolled] = useState(false);
-  const [servicesData, setServicesData] = useState<Service[]>([]);
-  const [industriesData, setIndustriesData] = useState<Industry[]>([]);
 
   useEffect(() => {
-    const fetchAll = async () => {
-      try {
-        const [servicesRes, industriesRes, settingsRes] = await Promise.all([
-          fetchCollection<Service>("services"),
-          fetchCollection<Industry>("industries"),
-          fetchSettings(),
-        ]);
-
-        setServicesData(servicesRes);
-        setIndustriesData(industriesRes);
-        setSettings(settingsRes);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-
-    fetchAll();
-
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
@@ -58,6 +42,8 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   if (!settings) return null;
+
+  // console.log(settings.site_logo_url);
 
   return (
     <header
@@ -98,7 +84,7 @@ export default function Header() {
               />
             </div>
             <div className="absolute top-6 hidden transition-all duration-300 ease-in-out group-hover:flex flex-col bg-background py-2 z-50 text-text-muted rounded-md capitalize  w-auto shadow-lg">
-              {industriesData.map((industry) => (
+              {industries.map((industry) => (
                 <Link
                   key={industry.id}
                   href={`/industries/${industry.slug}`}
@@ -124,7 +110,7 @@ export default function Header() {
               />
             </div>
             <div className="absolute top-6 hidden transition-all duration-300 ease-in-out group-hover:flex flex-col bg-background py-2 z-50 text-text-muted rounded-md capitalize  w-auto shadow-lg">
-              {servicesData.map((service) => (
+              {services.map((service) => (
                 <Link
                   key={service.id}
                   href={`/services/${service.slug}`}
@@ -145,7 +131,7 @@ export default function Header() {
             Contact
           </Link>
         </nav>
-        <MobileMenu services={servicesData} industries={industriesData} />
+        <MobileMenu services={services} industries={industries} />
       </div>
     </header>
   );

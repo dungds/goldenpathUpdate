@@ -1,6 +1,4 @@
-import { use } from "react";
 import Image from "next/image";
-import { services, industries } from "@/lib/data";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
@@ -10,11 +8,10 @@ import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
 import { useState } from "react";
 import ConsultationForm from "@/components/ConsultationForm";
 import type { Industry } from "@/app/lib/types/industries";
-import {
-  fetchCollection,
-  fetchItemBySlug,
-} from "@/app/lib/api/fetchCollection";
+import { getGlobalData } from "@/app/lib/api/fetchGlobal";
+import { fetchItemBySlug } from "@/app/lib/api/fetchCollection";
 import type { Service } from "@/app/lib/types/services";
+const { services, industries } = await getGlobalData();
 
 export default async function IndustryDetail({
   params,
@@ -22,10 +19,8 @@ export default async function IndustryDetail({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const [industry, services, industryData] = await Promise.all([
+  const [industry] = await Promise.all([
     fetchItemBySlug<Industry>("industries", slug),
-    fetchCollection<Service>("services"),
-    fetchCollection<Industry>("industries"),
   ]);
 
   if (!industry) return notFound();
@@ -181,7 +176,7 @@ export default async function IndustryDetail({
       <section className="py-8 md:py-14 bg-background-neutral section-container">
         <H2 className="md:pb-4">Industries</H2>
         <ul className=" py-4 flex gap-2 flex-wrap">
-          {industryData.map((industry) => (
+          {industries.map((industry) => (
             <li
               className=" bg-background hover:bg-primary font-semibold px-8 py-4 md:px-16 md:py-4 rounded-sm"
               key={industry.id}

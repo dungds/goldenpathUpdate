@@ -6,12 +6,11 @@ import ContactForm from "@/components/ContactForm";
 import ServiceSection from "@/components/ServiceSection";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
 import type { Service } from "@/app/lib/types/services";
-import {
-  fetchItemBySlug,
-  fetchCollection,
-} from "@/app/lib/api/fetchCollection";
+import { fetchItemBySlug } from "@/app/lib/api/fetchCollection";
 import ConsultationForm from "@/components/ConsultationForm";
-import { Industry } from "@/app/lib/types/industries";
+import { getGlobalData } from "@/app/lib/api/fetchGlobal";
+const { services, industries } = await getGlobalData();
+
 export default async function ServiceDetail({
   params,
 }: {
@@ -19,10 +18,8 @@ export default async function ServiceDetail({
 }) {
   const { slug } = await params; // await params để lấy slug
 
-  const [service, servicesData, industries] = await Promise.all([
+  const [service] = await Promise.all([
     fetchItemBySlug<Service>("services", slug),
-    fetchCollection<Service>("services"),
-    fetchCollection<Industry>("industries"),
   ]);
 
   if (!service) return notFound();
@@ -174,7 +171,7 @@ export default async function ServiceDetail({
           </Button>
         </div>
       </section>
-      <ServiceSection services={servicesData} />
+      <ServiceSection services={services} />
 
       <section className="py-8 md:py-14 bg-background-neutral section-container">
         <H2 className="md:pb-4">Industries</H2>

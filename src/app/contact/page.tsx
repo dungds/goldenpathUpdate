@@ -1,4 +1,3 @@
-"use client";
 import { H2, H3, H4, Paragraph } from "@/components/ui";
 import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
@@ -6,29 +5,11 @@ import { Button } from "@/components/ui";
 import Link from "next/link";
 import type { Setting } from "../lib/types/settings";
 
-import { fetchSettings } from "../lib/api/fetchSettings";
+import { getGlobalData } from "../lib/api/fetchGlobal";
+import ContactFormPage from "@/components/ContactFormPage";
+export default async function Contact() {
+  const { settings } = await getGlobalData();
 
-export default function Contact() {
-  const [settings, setSettings] = useState<Setting | null>(null);
-  useEffect(() => {
-    fetchSettings().then(setSettings).catch(console.error);
-  }, []);
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  if (!settings) return null;
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // chặn reload trang
-    console.log("Send contact:", form); // kiểm tra kết quả
-  };
   return (
     <section className="pt-6">
       <div className="relative -mt-2 py-10 lg:py-20 md:-mt-10 bg-[url(/img/contact-banner.jpg)] bg-cover bg-no-repeat bg-left-bottom section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark">
@@ -125,55 +106,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div>
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4 pb-10  bg-background-neutral"
-            >
-              <div>
-                <H3 className="text-text-primary text-3xl md:pb-4 md:text-5xl md:font-medium">
-                  Get in touch
-                </H3>
-                <Paragraph className="text-lg md:text-xl pb-6">
-                  Contact us and someone from our team of experts will contact
-                  you
-                </Paragraph>
-              </div>
-
-              <input
-                onChange={handleChange}
-                placeholder="Name"
-                name="name"
-                value={form.name}
-                className="w-full bg-background-light p-2 border border-gray-300  focus:border-primary focus:outline-none text-text-primary"
-              />
-              <input
-                name="email"
-                onChange={handleChange}
-                placeholder="Email*"
-                value={form.email}
-                className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
-              />
-              <input
-                onChange={handleChange}
-                placeholder="Phone"
-                name="phone"
-                value={form.phone}
-                className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
-              />
-              <textarea
-                name="message"
-                placeholder="Message"
-                onChange={handleChange}
-                value={form.message}
-                className="bg-background-light p-2 w-full h-40  border border-gray-300  focus:border-primary focus:outline-none "
-              />
-
-              <Button type="submit" className="bg-primary px-12 py-2">
-                Submit
-              </Button>
-            </form>
-          </div>
+          <ContactFormPage />
         </div>
       </div>
     </section>

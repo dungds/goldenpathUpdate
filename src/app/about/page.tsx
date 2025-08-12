@@ -37,7 +37,6 @@ export default async function About() {
               src={about.section2.image}
               width={2100}
               height={945}
-              layout="reponsive"
               alt="about us banner"
               loading="lazy"
             />
@@ -81,6 +80,7 @@ export default async function About() {
               className="md:object-cover w-auto"
               fill
               alt="banner about us 2"
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           )}
         </div>

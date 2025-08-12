@@ -102,7 +102,7 @@ export default function ServiceSection({ services }: Props) {
 
             <Button href={`/services/${selected.slug}`}>Explore</Button>
           </div>
-          <div className="relative w-full">
+          <div className="relative " style={{ width: "100%", height: 300 }}>
             {selected.section1_image && (
               <Image
                 src={selected.section1_image}

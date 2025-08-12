@@ -1,20 +1,22 @@
 import { Icon } from "@iconify/react";
 
 import { Paragraph } from "@/components/ui";
-import { industries, services, socialLink } from "@/lib/data";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchCollection } from "@/app/lib/api/fetchCollection";
+import type { Setting } from "@/app/lib/types/settings";
 import type { Service } from "@/app/lib/types/services";
 import type { Industry } from "@/app/lib/types/industries";
-import { fetchSettings } from "@/app/lib/api/fetchSettings";
-
-export default async function Footer() {
-  const [services, industries, settings] = await Promise.all([
-    fetchCollection<Service>("services"),
-    fetchCollection<Industry>("industries"),
-    fetchSettings(),
-  ]);
+type HeaderProps = {
+  settings: Setting;
+  services: Service[];
+  industries: Industry[];
+};
+export default async function Header({
+  settings,
+  services,
+  industries,
+}: HeaderProps) {
+  if (!settings) return null;
 
   return (
     <footer className="py-10 text-text-on-dark section-container bg-[url(/img/bg_footer.jpg)] bg-no-repeat bg-cover bg-gray-100 text-black">

@@ -9,23 +9,20 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import PartnerSlider from "@/components/Partner";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
 import { fetchFaqs } from "./lib/api/faqs";
-import { fetchCollection } from "./lib/api/fetchCollection";
 import { fetchPartners } from "./lib/api/FetchImage";
 import type { Service } from "./lib/types/services";
 import { fetchAbout } from "./lib/api/fetchAbout";
 import type { Industry } from "./lib/types/industries";
 import type { Setting } from "./lib/types/settings";
-import { fetchSettings } from "./lib/api/fetchSettings";
+import { getGlobalData } from "./lib/api/fetchGlobal";
 export default async function Home() {
-  const [faqs, partners, about, services, industries, settings] =
-    await Promise.all([
-      fetchFaqs(),
-      fetchPartners(),
-      fetchAbout(),
-      fetchCollection<Service>("services"),
-      fetchCollection<Industry>("industries"),
-      fetchSettings(),
-    ]);
+  const [faqs, partners, about] = await Promise.all([
+    fetchFaqs(),
+    fetchPartners(),
+    fetchAbout(),
+  ]);
+  const { settings, services, industries } = await getGlobalData();
+
   return (
     <div className="">
       {settings && <HeroSection settings={settings} />}
