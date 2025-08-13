@@ -67,7 +67,7 @@ export default function IndustrySlider({ industries }: Props) {
 
                   <Button
                     variant="outline"
-                    href={industry.slug}
+                    href={`/industries/${industry.slug}`}
                     className="text-text-on-dark mt-6 md:hidden md:group-hover:md:block"
                   >
                     Explore

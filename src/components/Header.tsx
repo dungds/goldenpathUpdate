@@ -54,15 +54,13 @@ export default function Header({
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
         <div>
           <Link href={"/"}>
-            {settings.site_logo_url && (
-              <Image
-                src={settings.site_logo_url}
-                className="w-24 md:w-32"
-                width={180}
-                height={55}
-                alt="logo Golden Path"
-              />
-            )}
+            <img
+              src={settings.site_logo_url}
+              className="w-24 md:w-32"
+              width="180"
+              height="55"
+              alt="logo Golden Path"
+            />
           </Link>
         </div>
         <nav className="hidden lg:space-x-16 md:space-x-6 uppercase md:flex justify-between items-center ">

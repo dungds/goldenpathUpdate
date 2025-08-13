@@ -7,7 +7,10 @@ export async function fetchFaqs(): Promise<Faq[]> {
   }
 
   const res = await fetch(`${baseUrl}/api/faqs`, {
-    cache: "no-store",
+     next: {
+      revalidate: false, 
+      tags: ["faqs"], 
+    }, 
   });
 
   if (!res.ok) {

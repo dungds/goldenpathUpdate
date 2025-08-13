@@ -6,11 +6,11 @@ import { Icon } from "@iconify/react";
 import type { Faq } from "@/app/lib/types/faqs";
 
 export default function FaqSection({ faqs = [] }: { faqs?: Faq[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   if (!faqs || faqs.length === 0) {
     return <div>No FAQs found</div>;
   }
-
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

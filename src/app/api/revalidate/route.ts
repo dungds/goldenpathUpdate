@@ -1,6 +1,6 @@
 import { revalidateTag } from "next/cache";
 
-export async function GET(request: Request) {
+export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
   const secret = searchParams.get("secret");
 
@@ -11,8 +11,10 @@ export async function GET(request: Request) {
   revalidateTag("settings");
   revalidateTag("collection");
     revalidateTag("collectionSlug");
-
+   revalidateTag("faqs");
   revalidateTag("aboutUs");
 
-  return Response.json({ revalidated: true, now: Date.now() });
-}
+return new Response(
+    JSON.stringify({ revalidated: true, now: Date.now() }),
+    { headers: { "Content-Type": "application/json" } }
+  );}

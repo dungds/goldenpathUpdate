@@ -16,12 +16,8 @@ import type { Industry } from "./lib/types/industries";
 import type { Setting } from "./lib/types/settings";
 import { getGlobalData } from "./lib/api/fetchGlobal";
 export default async function Home() {
-  const [faqs, partners, about] = await Promise.all([
-    fetchFaqs(),
-    fetchPartners(),
-    fetchAbout(),
-  ]);
-  const { settings, services, industries } = await getGlobalData();
+  const [partners, about] = await Promise.all([fetchPartners(), fetchAbout()]);
+  const { settings, services, industries, faqs } = await getGlobalData();
 
   return (
     <div className="">

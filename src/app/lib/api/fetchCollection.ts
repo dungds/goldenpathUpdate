@@ -5,7 +5,7 @@ export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
 
   const res = await fetch(`${baseUrl}/api/${endpoint}`, {
 next: {
-      revalidate: 3600, 
+      revalidate: false, 
       tags: ["collection"], 
     },  });
 
@@ -18,7 +18,7 @@ export async function fetchItemBySlug<T>(endpoint: string, slug: string): Promis
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const res = await fetch(`${baseUrl}/api/${endpoint}/${slug}`, {
      next: {
-      revalidate: 3600, 
+      revalidate: false, 
       tags: ["collectionSlug"], 
     }, 
   });

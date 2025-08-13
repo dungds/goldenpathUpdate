@@ -26,15 +26,13 @@ export default async function Header({
       >
         <div className="flex-col flex gap-4">
           <div>
-            {settings.site_logo_url && (
-              <Image
-                src={settings.site_logo_url}
-                className="w-24 md:w-32"
-                width={180}
-                height={55}
-                alt="logo Golden Path"
-              />
-            )}
+            <img
+              src={settings.site_logo_url}
+              className="w-24 md:w-32"
+              width="180"
+              height="55"
+              alt="logo Golden Path"
+            />
           </div>
 
           <div>
@@ -77,7 +75,9 @@ export default async function Header({
                     key={industry.id}
                     className="flex gap-1 items-center hover:text-primary"
                   >
-                    <Link href={industry.slug}> {industry.name}</Link>
+                    <Link href={`/industries/${industry.slug}`}>
+                      {industry.name}
+                    </Link>
                   </li>
                 ) : null
               )}
@@ -96,7 +96,10 @@ export default async function Header({
                     key={service.id}
                     className="flex gap-1 items-center hover:text-primary"
                   >
-                    <Link href={service.slug}> {service.name}</Link>
+                    <Link href={`/services/${service.slug}`}>
+                      {" "}
+                      {service.name}{" "}
+                    </Link>
                   </li>
                 ) : null
               )}

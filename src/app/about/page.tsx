@@ -6,14 +6,11 @@ import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
 import { fetchFaqs } from "../lib/api/faqs";
 import { fetchPartners } from "../lib/api/FetchImage";
 import { fetchAbout } from "../lib/api/fetchAbout";
+import { getGlobalData } from "../lib/api/fetchGlobal";
 
 export default async function About() {
-  const [faqs, partners, about] = await Promise.all([
-    fetchFaqs(),
-    fetchPartners(),
-    fetchAbout(),
-  ]);
-
+  const [partners, about] = await Promise.all([fetchPartners(), fetchAbout()]);
+  const { faqs } = await getGlobalData();
   return (
     <section>
       <section className="py-10 pb-20 md:p-16 section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark md:gap-10 lg:gap-20 gap-6">

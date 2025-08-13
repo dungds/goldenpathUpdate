@@ -3,7 +3,7 @@ export async function fetchAbout():Promise<About>{
       const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 const res=await fetch(`${baseUrl}/api/about`,{
       next: {
-      revalidate: 3600, 
+      revalidate: false, 
       tags: ["aboutUs"], 
     }, 
 });

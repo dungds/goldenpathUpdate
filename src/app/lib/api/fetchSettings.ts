@@ -5,7 +5,7 @@ export async function fetchSettings():Promise<Setting> {
 
   const res = await fetch(`${baseUrl}/api/settings`, {
  next: {
-      revalidate: 3600, 
+      revalidate: false, 
       tags: ["settings"], 
     }, 
   });  
