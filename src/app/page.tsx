@@ -8,16 +8,11 @@ import IndustrySlider from "@/components/IndustrySlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import PartnerSlider from "@/components/Partner";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
-import { fetchFaqs } from "./lib/api/faqs";
-import { fetchPartners } from "./lib/api/FetchImage";
-import type { Service } from "./lib/types/services";
 import { fetchAbout } from "./lib/api/fetchAbout";
-import type { Industry } from "./lib/types/industries";
-import type { Setting } from "./lib/types/settings";
 import { getGlobalData } from "./lib/api/fetchGlobal";
 export default async function Home() {
-  const [partners, about] = await Promise.all([fetchPartners(), fetchAbout()]);
-  const { settings, services, industries, faqs } = await getGlobalData();
+  const [about, { settings, services, industries, faqs, partners }] =
+    await Promise.all([fetchAbout(), getGlobalData()]);
 
   return (
     <div className="">

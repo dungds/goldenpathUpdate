@@ -2,15 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
-import FaqSection from "@/components/FraSection";
 import ServiceSection from "@/components/ServiceSection";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
-import { useState } from "react";
 import ConsultationForm from "@/components/ConsultationForm";
 import type { Industry } from "@/app/lib/types/industries";
 import { getGlobalData } from "@/app/lib/api/fetchGlobal";
 import { fetchItemBySlug } from "@/app/lib/api/fetchCollection";
-import type { Service } from "@/app/lib/types/services";
 const { services, industries } = await getGlobalData();
 
 export default async function IndustryDetail({

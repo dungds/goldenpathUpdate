@@ -3,14 +3,16 @@ import FaqSection from "@/components/FraSection";
 import ContactForm from "@/components/ContactForm";
 import PartnerSlider from "@/components/Partner";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
-import { fetchFaqs } from "../lib/api/faqs";
-import { fetchPartners } from "../lib/api/FetchImage";
 import { fetchAbout } from "../lib/api/fetchAbout";
 import { getGlobalData } from "../lib/api/fetchGlobal";
+import type { About } from "../lib/types/about";
 
 export default async function About() {
-  const [partners, about] = await Promise.all([fetchPartners(), fetchAbout()]);
-  const { faqs } = await getGlobalData();
+  const [about, { faqs, partners }] = await Promise.all([
+    fetchAbout(),
+    getGlobalData(),
+  ]);
+
   return (
     <section>
       <section className="py-10 pb-20 md:p-16 section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark md:gap-10 lg:gap-20 gap-6">

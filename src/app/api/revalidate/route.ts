@@ -13,6 +13,7 @@ export async function POST(request: Request) {
     revalidateTag("collectionSlug");
    revalidateTag("faqs");
   revalidateTag("aboutUs");
+  revalidateTag("partner");
 
 return new Response(
     JSON.stringify({ revalidated: true, now: Date.now() }),
