@@ -60,7 +60,7 @@ export default async function ServiceDetail({
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: service.section1_description,
+                __html: service.section2_description,
               }}
             />
           )}
@@ -97,7 +97,7 @@ export default async function ServiceDetail({
                       <div
                         className="prose text-text-dark-muted pt-1"
                         dangerouslySetInnerHTML={{
-                          __html: service.section1_description,
+                          __html: item.section3_description,
                         }}
                       />
                     )}
@@ -150,7 +150,7 @@ export default async function ServiceDetail({
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: service.section1_description,
+                __html: service.section4_description,
               }}
             />
           )}

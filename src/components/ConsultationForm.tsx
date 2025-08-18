@@ -30,12 +30,11 @@ export default function ConsultationForm() {
     e.preventDefault(); // chặn reload trang
 
     try {
-      const apiUrl =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
       const formDataWithFrom = {
         ...form,
         origin_page: "consultant Page",
-        status: "uncheck",
+        status: "new",
       }; // Set from to "Contact Page"
       const response = await fetch(`${apiUrl}/api/customers`, {
         method: "POST",
@@ -94,7 +93,7 @@ export default function ConsultationForm() {
       <input
         name="name"
         onChange={handleChange}
-        placeholder="Name"
+        placeholder="Name*"
         required
         value={form.name}
         className="w-full bg-background-light p-2 border border-gray-300  focus:border-primary focus:outline-none text-text-primary"

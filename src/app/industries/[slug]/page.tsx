@@ -56,7 +56,7 @@ export default async function IndustryDetail({
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: industry.section1_description,
+                __html: industry.section2_description,
               }}
             />
           )}
@@ -94,7 +94,7 @@ export default async function IndustryDetail({
                       <div
                         className="prose text-text-dark-muted pt-1"
                         dangerouslySetInnerHTML={{
-                          __html: industry.section1_description,
+                          __html: item.section3_description,
                         }}
                       />
                     )}
@@ -147,7 +147,7 @@ export default async function IndustryDetail({
             <div
               className="prose"
               dangerouslySetInnerHTML={{
-                __html: industry.section1_description,
+                __html: industry.section4_description,
               }}
             />
           )}

@@ -7,6 +7,7 @@ export type Service = {
   section3_list:string;
   section1_description: string;
   section2_description:string;
+  
   section1_image: string;
     section3_image: string;
       section4_image: string;
