@@ -1,6 +1,19 @@
 "use client";
 import { useState } from "react";
 import { Paragraph, Button, H3 } from "@/components/ui";
+import Script from "next/script";
+
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (cb: () => void) => void;
+      execute: (
+        siteKey: string,
+        options: { action: string }
+      ) => Promise<string>;
+    };
+  }
+}
 
 export default function ContactForm() {
   const [form, setForm] = useState({
@@ -35,12 +48,25 @@ export default function ContactForm() {
     setStatus({ message: "", type: null }); // Reset status
 
     try {
+      const token = await new Promise<string>((resolve, reject) => {
+        if (!window.grecaptcha)
+          return reject(new Error("reCAPTCHA not loaded"));
+        window.grecaptcha.ready(() => {
+          window.grecaptcha
+            .execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!, {
+              action: "submit",
+            })
+            .then(resolve)
+            .catch(reject);
+        });
+      });
       const apiUrl =
         process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
       const formDataWithFrom = {
         ...form,
         from: "Contact Page",
         status: "uncheck",
+        recaptcha_token: token,
       }; // Set from to "Contact Page"
       const response = await fetch(`${apiUrl}/api/contacts`, {
         method: "POST",
@@ -79,6 +105,9 @@ export default function ContactForm() {
 
   return (
     <section className="bg-[url(/img/bg-contact.jpg)] bg-no-repeat bg-cover md:py-10 ">
+      <Script
+        src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+      />
       <div className="grid grid-cols-1 md:gap-10 lg:gap-20 md:grid-cols-2 section-container py-12">
         <div className="text-text-on-dark  py-10 pt-0  md:py-8 lg:py-20">
           <H3 className="font-semibold uppercase text-2xl md:text-4xl lg:text-5xl">
