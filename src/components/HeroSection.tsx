@@ -1,44 +1,24 @@
 "use client";
 import { useGlobal } from "@/app/context/SiteGlobalsContext";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { H1, Paragraph, Button } from "@/components/ui";
+import { 
+  containerVariants, 
+  fadeInUpVariants 
+} from "@/lib/motion-variants";
 
 export default function HeroSection() {
   const { settings } = useGlobal();
 
-  // Animation variants cho text
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
+  
 
-  const itemVariants: Variants = {
-    hidden: { 
-      opacity: 0, 
-      y: 30
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut"
-      }
-    }
-  };
+  
 
   return (
     <section className="">
       <div className="md:gap-10 lg:gap-30 md:pt-12 pb-10 text-text-on-dark md:px-10 lg:px-20 grid grid-cols-1 gap-6 items-center md:grid-cols-[3fr_4fr] bg-[url(/img/bg-hero.jpg)] bg-no-repeat bg-center">
         
-        {/* Left Content - Có Motion */}
         <motion.div 
           className="order-2 md:order-1 mx-4 md:mx-0 pt-6 pb-6 md:pb-10"
           variants={containerVariants}
@@ -46,26 +26,25 @@ export default function HeroSection() {
           animate="visible"
         >
           {/* Title */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={fadeInUpVariants}>
             <H1>{settings.banner_title}</H1>
           </motion.div>
 
           {/* Description */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={fadeInUpVariants}>
             <Paragraph className="md:text-xl pt-2 md:pt-6 pb-6 md:pb-10">
               {settings.banner_description}
             </Paragraph>
           </motion.div>
 
           {/* Button */}
-          <motion.div variants={itemVariants}>
+          <motion.div variants={fadeInUpVariants}>
             <Button href="/about" className="">
               Contact Us
             </Button>
           </motion.div>
         </motion.div>
 
-        {/* Right Image - Không có Motion */}
         <div className="relative order-1 md:order-2 h-full">
           <div className="relative inset-0">
             {settings.main_banner_url && (
