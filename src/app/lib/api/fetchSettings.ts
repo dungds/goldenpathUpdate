@@ -1,14 +1,12 @@
-import { log } from "console";
 import type { Setting } from "../types/settings";
 export async function fetchSettings(): Promise<Setting> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
   const res = await fetch(`${baseUrl}/api/settings`, {
-    // next: {
-    //   revalidate: 86400,
-    //   tags: ["settings"],
-    // },
-    cache: "no-store"
+    next: {
+      revalidate: 3600,
+      tags: ["settings"],
+    },
   });
 
   if (!res.ok) {
