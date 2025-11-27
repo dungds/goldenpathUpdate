@@ -119,24 +119,7 @@ export default function HeroSection() {
           initial="hidden"
           animate="visible"
         >
-          {/* Animated Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 mb-6 rounded-full bg-white/10 backdrop-blur-sm border border-white/20"
-          >
-            <motion.span
-              className="w-2 h-2 bg-green-400 rounded-full"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [1, 0.8, 1]
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity
-              }}
-            />
-            <span className="text-sm font-medium">✨ Welcome to Innovation</span>
-          </motion.div>
+          
 
           {/* Title with Gradient */}
           <motion.div variants={itemVariants}>
@@ -204,33 +187,7 @@ export default function HeroSection() {
             </Button>
           </motion.div>
 
-          {/* Stats or Trust Indicators */}
-          <motion.div
-            variants={itemVariants}
-            className="flex gap-8 mt-8 pt-8 border-t border-white/20"
-          >
-            {[
-              { label: "Projects", value: "500+" },
-              { label: "Clients", value: "200+" },
-              { label: "Years", value: "10+" }
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ y: -5 }}
-                className="cursor-default"
-              >
-                <motion.div
-                  className="text-2xl md:text-3xl font-bold"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1 + index * 0.2, duration: 0.5 }}
-                >
-                  {stat.value}
-                </motion.div>
-                <div className="text-sm opacity-70">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
+          
         </motion.div>
 
         {/* Right Image */}
@@ -247,7 +204,6 @@ export default function HeroSection() {
             }}
             transition={{
               duration: 3,
-              repeat: Infinity,
               ease: "easeInOut"
             }}
           >
@@ -283,18 +239,7 @@ export default function HeroSection() {
                   />
                 </motion.div>
 
-                {/* Decorative Elements */}
-                <motion.div
-                  className="absolute -top-10 -right-10 w-20 h-20 border-4 border-purple-500/30 rounded-full"
-                  animate={{
-                    rotate: 360,
-                    scale: [1, 1.2, 1]
-                  }}
-                  transition={{
-                    rotate: { duration: 20, repeat: Infinity, ease: "linear" },
-                    scale: { duration: 3, repeat: Infinity, ease: "easeInOut" }
-                  }}
-                />
+                
                 <motion.div
                   className="absolute -bottom-10 -left-10 w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-lg"
                   animate={{
