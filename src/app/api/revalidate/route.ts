@@ -1,8 +1,17 @@
+// app/api/revalidate/route.ts
 import { revalidateTag } from "next/cache";
 
 export async function POST(req: Request) {
   const { searchParams } = new URL(req.url);
-  const secret = searchParams.get("secret");
+
+  const querySecret = searchParams.get("secret");
+  let bodySecret = null;
+  try {
+    const body = await req.json();
+    bodySecret = body.secret;
+  } catch {}
+  
+  const secret = querySecret || bodySecret;
 
   if (secret !== process.env.NEXT_REVALIDATE_SECRET) {
     return new Response("Invalid token", { status: 401 });
