@@ -62,15 +62,6 @@ export default function HeroSection() {
     }
   };
 
-  const floatingAnimation = {
-    y: [0, -20, 0],
-    transition: {
-      duration: 3,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }
-  };
-
   return (
     <section ref={sectionRef} className="relative overflow-hidden">
       {/* Animated Background Gradient */}
@@ -251,7 +242,14 @@ export default function HeroSection() {
         >
           <motion.div 
             className="relative inset-0"
-            animate={floatingAnimation}
+            animate={{
+              y: [0, -20, 0]
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
           >
             {settings.main_banner_url && (
               <>
@@ -324,7 +322,10 @@ export default function HeroSection() {
         <span className="text-sm">Scroll Down</span>
         <motion.div
           animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity 
+          }}
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
