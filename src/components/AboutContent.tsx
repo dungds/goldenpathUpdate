@@ -39,12 +39,8 @@ export default function AboutContent({ about }: AboutClientProps) {
       </motion.div>
 
       <section className="relative bg-background-neutral">
-        <motion.div 
+        <div 
           className="md:section-container -translate-y-10 flex justify-center w-full aspect-[21/9]"
-          variants={fadeInUpVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
         >
           {about.section2.image && (
             <Image
@@ -54,7 +50,7 @@ export default function AboutContent({ about }: AboutClientProps) {
               fill
             />
           )}
-        </motion.div>
+        </div>
 
         <div className="-mt-10 gap-8 py-8 pb-14 md:py-10 md:pb-20 grid grid-cols-1 md:grid-cols-2 section-container">
           <motion.div 
