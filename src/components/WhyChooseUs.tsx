@@ -21,7 +21,7 @@ export default function WhyChooseUs({ About }: Props) {
           <motion.div className=" relative md:order-1 order-2  z-10 overflow-visible  "
           variants={fadeInUpVariants}
           initial="hidden"
-          animate="visible">
+          whileInView="visible">
             <img
               src="/img/decor.jpg"
               className="lg:w-32  lg:h-32 z-10 absolute -top-4 -right-4 hidden lg:block"

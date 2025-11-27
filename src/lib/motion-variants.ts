@@ -1,6 +1,5 @@
 import { Variants } from "framer-motion";
 
-// Container với stagger children
 export const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {

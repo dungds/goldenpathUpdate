@@ -6,6 +6,11 @@ import { H2, Paragraph,  H4 } from "@/components/ui";
 import { fetchAbout } from "../lib/api/fetchAbout";
 import { getDynamicData } from "../lib/api/fetchGlobal";
 import type { About } from "../lib/types/about";
+import { motion } from "framer-motion";
+import { 
+  containerVariants, 
+  fadeInUpVariants 
+} from "@/lib/motion-variants";
 
 export default async function About() {
 
@@ -16,10 +21,13 @@ export default async function About() {
 
   return (
     <section>
-      <section className="py-10 pb-20 md:p-16 section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark md:gap-10 lg:gap-20 gap-6">
-        <div>
+      <motion.div className="py-10 pb-20 md:p-16 section-container grid grid-cols-1 md:grid-cols-2  text-text-on-dark md:gap-10 lg:gap-20 gap-6"  variants={containerVariants}
+          initial="hidden"
+          whileInView="visible">
+          <motion.div variants={fadeInUpVariants}>
           <H2 className="max-w-[600px] lg:text-5xl">{about.section1.title} </H2>
-        </div>
+          </motion.div>
+          <motion.div variants={fadeInUpVariants}>
 
         {about.section1.description && (
           <div
@@ -29,7 +37,8 @@ export default async function About() {
             }}
           />
         )}
-      </section>
+        </motion.div>
+      </motion.div>
       <section className="relative  bg-background-neutral ">
         <div className="md:section-container -translate-y-10 flex justify-center  w-full aspect-[21/9]">
           {about.section2.image && (
