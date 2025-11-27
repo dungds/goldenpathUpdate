@@ -5,6 +5,11 @@ import type { About } from "@/app/lib/types/about";
 type Props = {
   About: About;
 };
+import { motion } from "framer-motion";
+import { 
+  containerVariants, 
+  fadeInUpVariants 
+} from "@/lib/motion-variants";
 
 export default function WhyChooseUs({ About }: Props) {
   return (
@@ -13,7 +18,10 @@ export default function WhyChooseUs({ About }: Props) {
         <div className="absolute inset-0 bg-[url(/img/bg-black-wave.jpg)] bg-no-repeat bg-cover z-0" />
 
         <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:gap-16  gap-10  md:px-10 lg:px-20 md:pb-12 ">
-          <div className=" relative md:order-1 order-2  z-10 overflow-visible  ">
+          <motion.div className=" relative md:order-1 order-2  z-10 overflow-visible  "
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible">
             <img
               src="/img/decor.jpg"
               className="lg:w-32  lg:h-32 z-10 absolute -top-4 -right-4 hidden lg:block"
@@ -30,7 +38,7 @@ export default function WhyChooseUs({ About }: Props) {
                 priority
               />
             )}
-          </div>
+          </motion.div>
 
           {/* Cột text (trái) */}
           <div className="px-4 md:pt-10   md:order-2 order-1  z-10  ">

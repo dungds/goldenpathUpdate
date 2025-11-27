@@ -1,12 +1,12 @@
 "use client";
 import { useGlobal } from "@/app/context/SiteGlobalsContext";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import { H1, Paragraph, Button } from "@/components/ui";
 import { 
   containerVariants, 
   fadeInUpVariants 
 } from "@/lib/motion-variants";
+import Image from "next/image";
+import { H1, Paragraph, Button } from "@/components/ui";
 
 export default function HeroSection() {
   const { settings } = useGlobal();
