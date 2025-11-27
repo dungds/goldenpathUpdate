@@ -19,7 +19,7 @@ export default function WhyChooseUs({ About }: Props) {
 
         <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:gap-16  gap-10  md:px-10 lg:px-20 md:pb-12 ">
           <motion.div className=" relative md:order-1 order-2  z-10 overflow-visible  "
-          variants={containerVariants}
+          variants={fadeInUpVariants}
           initial="hidden"
           animate="visible">
             <img
