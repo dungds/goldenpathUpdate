@@ -2,7 +2,11 @@
 import { useState } from "react";
 import { Paragraph, Button, H3 } from "@/components/ui";
 import Script from "next/script";
-
+import { motion } from "framer-motion";
+import { 
+  containerVariants, 
+  fadeInUpVariants 
+} from "@/lib/motion-variants";
 declare global {
   interface Window {
     grecaptcha: {
@@ -109,18 +113,32 @@ export default function ContactForm() {
         src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
       />
       <div className="grid grid-cols-1 md:gap-10 lg:gap-20 md:grid-cols-2 section-container py-12">
-        <div className="text-text-on-dark  py-10 pt-0  md:py-8 lg:py-20">
+        <motion.div className="text-text-on-dark  py-10 pt-0  md:py-8 lg:py-20"
+        variants={containerVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                >
+                  <motion.div variants={fadeInUpVariants}>
+
           <H3 className="font-semibold uppercase text-2xl md:text-4xl lg:text-5xl">
             CONTACT US NOW!
           </H3>
+          </motion.div>
+                  <motion.div variants={fadeInUpVariants}>
+
           <Paragraph className="md:text-xl lg:text-2xl font-bold pt-2 pb-3">
             We&apos;d love to hear from you
           </Paragraph>
+          </motion.div>
+                  <motion.div variants={fadeInUpVariants}>
+
           <Paragraph className="lg:text-xl lg:font-light">
             Need trusted business consultants in Dubai? Connect with us today
             and explore what our team can offer.
           </Paragraph>
-        </div>
+          </motion.div>
+        </motion.div>
         <form
           onSubmit={handleSubmit}
           className="space-y-4 px-4 py-8 md:py-10 lg:py-12 md:px-6 lg:px-12 bg-background rounded-md"

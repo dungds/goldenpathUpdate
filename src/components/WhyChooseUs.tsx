@@ -18,11 +18,7 @@ export default function WhyChooseUs({ About }: Props) {
         <div className="absolute inset-0 bg-[url(/img/bg-black-wave.jpg)] bg-no-repeat bg-cover z-0" />
 
         <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:gap-16  gap-10  md:px-10 lg:px-20 md:pb-12 ">
-          <motion.div className=" relative md:order-1 order-2  z-10 overflow-visible  "
-          variants={fadeInUpVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}>
+          <div className=" relative md:order-1 order-2  z-10 overflow-visible  ">
             <img
               src="/img/decor.jpg"
               className="lg:w-32  lg:h-32 z-10 absolute -top-4 -right-4 hidden lg:block"
@@ -39,14 +35,23 @@ export default function WhyChooseUs({ About }: Props) {
                 priority
               />
             )}
-          </motion.div>
+          </div>
 
           {/* Cột text (trái) */}
           <div className="px-4 md:pt-10   md:order-2 order-1  z-10  ">
-            <div className="">
+            <motion.div className="" variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+      >
+                      <motion.div variants={fadeInUpVariants}>
+
               <H2 className="border-l-4 border-primary pl-6 ">
                 {About.section3.title}
               </H2>
+              </motion.div>
+                      <motion.div variants={fadeInUpVariants}>
+
               {About.section3.description && (
                 <div
                   className="prose py-6 text-justify"
@@ -55,9 +60,12 @@ export default function WhyChooseUs({ About }: Props) {
                   }}
                 />
               )}
+              </motion.div>
+                      <motion.div variants={fadeInUpVariants}>
 
               <Button href="/about">More Information</Button>
-            </div>
+              </motion.div>
+            </motion.div>
           </div>
         </div>
       </div>
