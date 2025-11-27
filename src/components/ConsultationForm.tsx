@@ -6,7 +6,9 @@ export default function ConsultationForm() {
   const [form, setForm] = useState({
     name: "",
     email: "",
-    origin_page: "",
+    from: "",
+    phone:"",
+    message:"",
   });
   const [status, setStatus] = useState<{
     message: string;
@@ -14,8 +16,9 @@ export default function ConsultationForm() {
     data?: {
       name: string;
       email: string;
-
-      origin_page: string | null;
+            phone: string|null;
+        message: string|null;
+      from: string | null;
     };
   }>({
     message: "",
@@ -30,13 +33,13 @@ export default function ConsultationForm() {
     e.preventDefault(); // chặn reload trang
 
     try {
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://api.goldenpath.ae";
       const formDataWithFrom = {
         ...form,
-        origin_page: "consultant Page",
-        status: "new",
+        from: "consultant Page",
+        status: "unchecked",
       }; // Set from to "Contact Page"
-      const response = await fetch(`${apiUrl}/api/customers`, {
+      const response = await fetch(`${apiUrl}/api/contacts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +61,11 @@ export default function ConsultationForm() {
         type: "success",
         data: result.data,
       });
-      setForm({ name: "", email: "", origin_page: "" });
+      setForm({   name: "",
+  email: "",
+  phone: "",
+  message: "",
+  from: "", });
     } catch (error) {
       setStatus({
         message: error instanceof Error ? error.message : "An error occurred",
@@ -104,7 +111,7 @@ export default function ConsultationForm() {
         onChange={handleChange}
         placeholder="Email*"
         value={form.email}
-        className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
+        className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none text-text-primary"
       />
 
       <Button type="submit" variant="dark" className=" px-12 py-2 ">

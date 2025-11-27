@@ -1,14 +1,14 @@
-import { H2, H3, H4, Paragraph } from "@/components/ui";
+"use client";
+import { H2, H3, Paragraph } from "@/components/ui";
 import { Icon } from "@iconify/react";
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui";
-import Link from "next/link";
-import type { Setting } from "../lib/types/settings";
 
-import { getGlobalData } from "../lib/api/fetchGlobal";
+import Link from "next/link";
+
+import { useGlobal } from "../context/SiteGlobalsContext";
 import ContactFormPage from "@/components/ContactFormPage";
-export default async function Contact() {
-  const { settings } = await getGlobalData();
+
+export default  function Contact() {
+  const { settings } = useGlobal();
 
   return (
     <section className="pt-6">

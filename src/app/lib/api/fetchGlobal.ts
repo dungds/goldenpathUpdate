@@ -7,29 +7,37 @@ import { Faq } from "../types/faqs";
 import { fetchFaqs } from "./faqs";
 import { fetchPartners } from "./FetchImage";
 import type { LogoPartner } from "../types/logoPartners";
-export async function getGlobalData() : Promise<{
+
+export async function getSiteGlobals(): Promise<{
   settings: Setting;
   services: Service[];
   industries: Industry[];
-  faqs: Faq[];
-  partners: LogoPartner[];
+
 
 }> {
-  const [settings, services, industries,faqs,partners] = await Promise.all([
+  const [settings, services, industries] = await Promise.all([
     fetchSettings(),
     fetchCollection<Service>("services"),
     fetchCollection<Industry>("industries"),
-    fetchFaqs(),
-    fetchPartners(),
   ]);
 
   return {
-    settings,
-    services,
-    industries,
-    faqs,
-    partners,
+    settings, services, industries
+
   };
+}
+export async function getDynamicData(): Promise<{
+  faqs: Faq[];
+  partners: LogoPartner[];
+}> {
+  const [faqs, partners] = await Promise.all([
+    fetchFaqs(),
+    fetchPartners(),
+  ]);
+  console.log("[getDynamicData] result:", faqs);
+  console.log("[getDynamicData] result:", partners);
+
+  return { faqs, partners };
 }
 
 

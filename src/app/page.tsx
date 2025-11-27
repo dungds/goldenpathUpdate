@@ -7,20 +7,24 @@ import ServiceSection from "@/components/ServiceSection";
 import IndustrySlider from "@/components/IndustrySlider";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import PartnerSlider from "@/components/Partner";
-import { H2, Paragraph, Button, H3 } from "@/components/ui";
+import { Paragraph, Button, H3 } from "@/components/ui";
 import { fetchAbout } from "./lib/api/fetchAbout";
-import { getGlobalData } from "./lib/api/fetchGlobal";
-export default async function Home() {
-  const [about, { settings, services, industries, faqs, partners }] =
-    await Promise.all([fetchAbout(), getGlobalData()]);
+import { getDynamicData } from "./lib/api/fetchGlobal";
+
+export default async function Home()  {
+  
+  const [about,{ faqs, partners}] = await Promise.all([fetchAbout(), getDynamicData()]);
+console.log("[Home] about:", about);
+console.log("[Home] faqs:", faqs);
+console.log("[Home] partners:", partners);
 
   return (
     <div className="">
-      {settings && <HeroSection settings={settings} />}
-      <ServiceSection services={services} />
+      {<HeroSection  />}
+      <ServiceSection />
       <WhyChooseUs About={about} />
       <PartnerSlider partners={partners} />
-      <IndustrySlider industries={industries} />
+      <IndustrySlider  />
       <section className="md:pt-16 pt-8 pb-0 md:py-20 md:section-container bg-[url(/img/bg-industries.jpg)] bg-no-repeat  bg-cover bg-top">
         <div className="grid grid-cols-1 md:bg-white md:grid-cols-2 gap-10 md:shadow-[0_1px_16px_0_rgba(0,_0,_0,_0.18)]  md:rounded-md relative">
           <div className="absolute bottom-0 md:-bottom-20 right-0 z-10">
@@ -33,12 +37,12 @@ export default async function Home() {
               alt="woman"
             />
           </div>
-          <div className="md:p-8 md:py-16 mx-4">
-            <H3 className="font-bold">
+          <div className="md:p-8 md:py-16 mx-4 ">
+            <H3 className="font-bold text-black">
               We enable businesses in the UAE to stay ahead with our consultancy
               solutions.
             </H3>
-            <Paragraph className="pt-2 pb-6">
+            <Paragraph className="pt-2 pb-6 text-black">
               Focus on expanding your business across the region while we, as a
               leading consultancy in Dubai, empower your success.
             </Paragraph>

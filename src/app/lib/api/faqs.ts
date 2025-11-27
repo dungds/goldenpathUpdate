@@ -2,15 +2,16 @@ import type { Faq } from "../types/faqs";
 export async function fetchFaqs(): Promise<Faq[]> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    if (!baseUrl) {
+  if (!baseUrl) {
     throw new Error("API URL is not defined");
   }
 
   const res = await fetch(`${baseUrl}/api/faqs`, {
-     next: {
-      revalidate: false, 
-      tags: ["faqs"], 
-    }, 
+    // next: {
+    //   revalidate: false,
+    //   tags: ["faqs"],
+    // },
+    cache: "no-store"
   });
 
   if (!res.ok) {

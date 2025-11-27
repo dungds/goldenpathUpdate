@@ -2,15 +2,16 @@ import Image from "next/image";
 import FaqSection from "@/components/FraSection";
 import ContactForm from "@/components/ContactForm";
 import PartnerSlider from "@/components/Partner";
-import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
+import { H2, Paragraph,  H4 } from "@/components/ui";
 import { fetchAbout } from "../lib/api/fetchAbout";
-import { getGlobalData } from "../lib/api/fetchGlobal";
+import { getDynamicData } from "../lib/api/fetchGlobal";
 import type { About } from "../lib/types/about";
 
 export default async function About() {
+
   const [about, { faqs, partners }] = await Promise.all([
     fetchAbout(),
-    getGlobalData(),
+    getDynamicData(),
   ]);
 
   return (
@@ -29,25 +30,25 @@ export default async function About() {
           />
         )}
       </section>
-      <section className="relative bg-background-neutral">
-        <div className="md:section-container -translate-y-10 flex justify-center">
+      <section className="relative  bg-background-neutral ">
+        <div className="md:section-container -translate-y-10 flex justify-center  w-full aspect-[21/9]">
           {about.section2.image && (
             <Image
-              src={about.section2.image}
-              width={2100}
-              height={945}
+              src={about.section2.image ||'/placeholder.png'}
+            
               alt="about us banner"
               loading="lazy"
+              fill
             />
           )}
         </div>
         <div className="-mt-10 gap-8 py-8 pb-14 md:py-10 md:pb-20 grid grid-cols-1 md:grid-cols-2 section-container ">
           <div className="md:pt-14 ">
-            <H2 className="lg:text-5xl">{about.section2.title}</H2>
+            <H2 className="lg:text-5xl text-black">{about.section2.title}</H2>
 
             {about.section2.description && (
               <div
-                className="prose pt-2 md:text-xl md:pt-6 text-justify"
+                className="prose pt-2 md:text-xl md:pt-6 text-justify text-black"
                 dangerouslySetInnerHTML={{
                   __html: about.section2.description,
                 }}
@@ -59,7 +60,7 @@ export default async function About() {
               {about.section2.list.map((item, index) => (
                 <li key={index} className="flex gap-2 md:px-6">
                   <div className=" pl-4  md:pl-6 before:content-[''] before:absolute before:top-2 before:left-0 relative before:w-2 before:h-2 before:bg-primary">
-                    <H4>{item.title}</H4>
+                    <H4 className="text-black">{item.title}</H4>
                     <Paragraph className="text-text-muted   pt-1">
                       {item.description}
                     </Paragraph>

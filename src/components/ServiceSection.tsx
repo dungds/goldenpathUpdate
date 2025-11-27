@@ -6,11 +6,10 @@ import Image from "next/image";
 import type { Service } from "@/app/lib/types/services";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
 import { stripHtml } from "string-strip-html";
-type Props = {
-  services: Service[];
-};
-
-export default function ServiceSection({ services }: Props) {
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
+export default function ServiceSection() {
+  const {services = [] } = useGlobal();
+  
   const [selected, setSelected] = useState<Service>(services[0] ?? null);
 
   const [openIndex, setOpenIndex] = useState<number | null>(0);

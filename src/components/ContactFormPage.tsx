@@ -17,7 +17,7 @@ export default function ContactFormPage() {
       name: string;
       email: string;
       phone: string | null;
-      message: string;
+      message: string | null;
       from: string | null;
     };
   }>({
@@ -35,7 +35,7 @@ export default function ContactFormPage() {
 
     try {
       const apiUrl =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+        process.env.NEXT_PUBLIC_API_URL || "https://api.duzn.io.vn/api";
       const formDataWithFrom = {
         ...form,
         from: "Contact Page",
@@ -119,14 +119,14 @@ export default function ContactFormPage() {
           required
           type="email"
           value={form.email}
-          className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
+          className="w-full bg-background-light  p-2  border border-gray-300 text-text-primary  focus:border-primary focus:outline-none"
         />
         <input
           onChange={handleChange}
           placeholder="Phone"
           name="phone"
           value={form.phone}
-          className="w-full bg-background-light  p-2  border border-gray-300  focus:border-primary focus:outline-none"
+          className="w-full bg-background-light  p-2  border border-gray-300 text-text-primary  focus:border-primary focus:outline-none"
         />
         <textarea
           name="message"
@@ -134,7 +134,7 @@ export default function ContactFormPage() {
           onChange={handleChange}
           required
           value={form.message}
-          className="bg-background-light p-2 w-full h-40  border border-gray-300  focus:border-primary focus:outline-none "
+          className="bg-background-light p-2 w-full h-40  border border-gray-300 text-text-primary  focus:border-primary focus:outline-none "
         />
 
         <Button type="submit" className="bg-primary px-12 py-2">

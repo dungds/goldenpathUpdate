@@ -1,26 +1,20 @@
-import { use } from "react";
+
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
 import ServiceSection from "@/components/ServiceSection";
 import { H2, Paragraph, Button, H3, H4 } from "@/components/ui";
-import type { Service } from "@/app/lib/types/services";
-import { fetchItemBySlug } from "@/app/lib/api/fetchCollection";
 import ConsultationForm from "@/components/ConsultationForm";
-import { getGlobalData } from "@/app/lib/api/fetchGlobal";
-const { services, industries } = await getGlobalData();
+import { getSiteGlobals } from "@/app/lib/api/fetchGlobal";
 
-export default async function ServiceDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>; // params là Promise
-}) {
-  const { slug } = await params; // await params để lấy slug
+export default async  function ServiceDetail({  params}: {params: Promise<{ slug: string }>;}) {
+  const { slug } = await params;
 
-  const [service] = await Promise.all([
-    fetchItemBySlug<Service>("services", slug),
-  ]);
+       const { services,industries } = await getSiteGlobals();
+  
+  const service = services.find((i) => i.slug === slug);
+
 
   if (!service) return notFound();
 
@@ -52,13 +46,13 @@ export default async function ServiceDetail({
         </div>
       </section>
 
-      <section className="grid grid-cols-1 md:grid-cols-2">
-        <div className="bg-background-neutral px-4  py-10 md:px-10 lg:px-20 md:py-16">
-          <H2 className="pb-4">{service.section2_title} </H2>
+      <section className="grid grid-cols-1 md:grid-cols-2 bg-background-neutral">
+        <div className=" px-4  py-10 md:px-10 lg:px-20 md:py-16">
+          <H2 className="pb-4 text-black">{service.section2_title} </H2>
 
           {service.section2_description && (
             <div
-              className="prose"
+              className="prose text-black "
               dangerouslySetInnerHTML={{
                 __html: service.section2_description,
               }}
@@ -67,7 +61,7 @@ export default async function ServiceDetail({
         </div>
         <div className="bg-primary px-4 py-10 md:px-10 md:py-16 lg:px-20">
           <div className="pb-4">
-            <Paragraph className="text-lg font-medium ">
+            <Paragraph className="text-lg font-medium text-text-primary ">
               Ready to expand in Dubai and the UAE? Our expert advice helps you
               make the right decisions for lasting growth.
             </Paragraph>
@@ -130,7 +124,7 @@ export default async function ServiceDetail({
           </div>
         </div>
       </section>
-      <section className="md:section-container bg-background-neutral grid grid-cols-1 md:grid-cols-2 pt-10 md:gap-4 lg:gap-10 md:py-20">
+      <section className="md:section-container  grid grid-cols-1 md:grid-cols-2 pt-10 md:gap-4 lg:gap-10 md:py-20 bg-background-neutral">
         <div className="flex md:justify-self-center order-2 md:order-1">
           {service.section4_image && (
             <Image
@@ -171,17 +165,17 @@ export default async function ServiceDetail({
           </Button>
         </div>
       </section>
-      <ServiceSection services={services} />
+      <ServiceSection/>
 
       <section className="py-8 md:py-14 bg-background-neutral section-container">
-        <H2 className="md:pb-4">Industries</H2>
+        <H2 className="md:pb-4 text-black">Industries</H2>
         <ul className=" py-4 flex gap-2 flex-wrap">
           {industries.map((industry) => (
             <li
               className=" bg-background hover:bg-primary font-semibold px-8 py-4 md:px-16 md:py-4 rounded-sm"
               key={industry.id}
             >
-              <Link href={`/industries/${industry.slug}`}>{industry.name}</Link>
+              <Link className ="text-black" href={`/industries/${industry.slug}`}>{industry.name}</Link>
             </li>
           ))}
         </ul>

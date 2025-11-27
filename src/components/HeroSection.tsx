@@ -1,13 +1,17 @@
+"use client";
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
+
 import Image from "next/image";
 import { H1, Paragraph, Button, H3 } from "@/components/ui";
-import type { Setting } from "@/app/lib/types/settings";
-export default function HeroSection({ settings }: { settings: Setting }) {
+export default function HeroSection() {
+    const { settings } = useGlobal();
+
   return (
     <section className="">
       <div className="md:gap-10 lg:gap-30 md:pt-12 pb-10 text-text-on-dark  md:px-10 lg:px-20 grid grid-cols-1  gap-6 items-center md:grid-cols-[3fr_4fr] bg-[url(/img/bg-hero.jpg)] bg-no-repeat bg-center">
         <div className="order-2 md:order-1 mx-4 md:mx-0 pt-6 pb-6 md:pb-10">
           <H1>{settings.banner_title}</H1>
-          <Paragraph className="md:text-xl pt-2 md:pt-6 pb-6 md:pb-10">
+          <Paragraph className="md:text-xl pt-2 md:pt-6 pb-6 md:pb-10 ">
             {settings.banner_description}
           </Paragraph>
           <Button href="/about" className="">

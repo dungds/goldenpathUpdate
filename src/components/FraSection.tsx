@@ -17,9 +17,9 @@ export default function FaqSection({ faqs = [] }: { faqs?: Faq[] }) {
   };
 
   return (
-    <section className="section-container py-10 md:py-16 bg-background-neutral flex flex-col justify-center items-center">
-      <H2 className="text-2xl font-bold">Frequently Asked Questions</H2>
-      <Paragraph className="text-base md:text-xl text-center pt-2 md:pt-4 pb-6 md:pb-10">
+    <section className="section-container py-10 md:py-16  flex flex-col justify-center items-center bg-background-neutral">
+      <H2 className="text-2xl font-bold text-black bg-background-neutral ">Frequently Asked Questions</H2>
+      <Paragraph className="text-base md:text-xl text-center pt-2 md:pt-4 pb-6 md:pb-10 text-black">
         These are some of the most frequently asked questions
       </Paragraph>
 
@@ -30,13 +30,13 @@ export default function FaqSection({ faqs = [] }: { faqs?: Faq[] }) {
           return (
             <div
               key={faq.id}
-              className="bg-white px-4 p-3 w-full   rounded-md transition-all duration-300 ease-in-out"
+              className="bg-white px-4 p-3 w-full   rounded-md transition-all duration-300 ease-in-out text-black"
             >
               <button
                 onClick={() => toggle(faq.id)}
                 className="w-full text-left flex gap-6 justify-between text-lg "
               >
-                <span className="font-medium">{faq.question}</span>
+                <span className="font-medium text-black">{faq.question}</span>
                 <span>
                   {isOpen ? (
                     <Icon icon="line-md:minus" width="24" height="24" />

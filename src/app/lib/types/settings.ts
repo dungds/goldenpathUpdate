@@ -2,6 +2,7 @@ export type Setting = {
   id: number;
   site_logo_url: string;
   main_banner_url:string;
+  social_share_image:string;
     favicon:string;
     banner_description:string;
  meta_title:string;

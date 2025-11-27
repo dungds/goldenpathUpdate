@@ -4,24 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@iconify/react";
 import MobileMenu from "./MobileMenu";
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import type { Service } from "@/app/lib/types/services";
-import type { Industry } from "@/app/lib/types/industries";
-import type { Setting } from "@/app/lib/types/settings";
-import { asyncWrapProviders } from "async_hooks";
+import Image from "next/image";
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
 
-type HeaderProps = {
-  settings: Setting;
-  services: Service[];
-  industries: Industry[];
-};
 
-export default function Header({
-  settings,
-  services,
-  industries,
-}: HeaderProps) {
+export default function Header() {
+const { settings, services = [], industries = [] } = useGlobal();
+  
   const pathname = usePathname();
   // console.log(settings);
 
@@ -54,6 +44,7 @@ export default function Header({
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
         <div>
           <Link href={"/"}>
+          {/* <Image src={settings.site_logo_url} alt="logo Golden Path" width={200} height={80} /> */}
             <img
               src={settings.site_logo_url}
               className="w-24 md:w-32"
@@ -129,7 +120,7 @@ export default function Header({
             Contact
           </Link>
         </nav>
-        <MobileMenu services={services} industries={industries} />
+        <MobileMenu  />
       </div>
     </header>
   );

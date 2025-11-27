@@ -9,13 +9,12 @@ import { Icon } from "@iconify/react";
 import Image from "next/image";
 import { stripHtml } from "string-strip-html";
 import { H2, Paragraph, Button, H3 } from "@/components/ui";
-import type { Industry } from "@/app/lib/types/industries";
 
-type Props = {
-  industries: Industry[];
-};
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
 
-export default function IndustrySlider({ industries }: Props) {
+export default function IndustrySlider() {
+  const { industries = [] } = useGlobal();
+
   if (!Array.isArray(industries) || industries.length === 0) {
     return null;
   }
@@ -23,7 +22,7 @@ export default function IndustrySlider({ industries }: Props) {
   return (
     <section className="bg-white w-full relative overflow-hidden md:pb-0">
       <div className="section-container pb-6">
-        <H2>Our Expert Industries</H2>
+        <H2 className="text-black">Our Expert Industries</H2>
       </div>
 
       <div className="md:mx-10 lg:mx-20">

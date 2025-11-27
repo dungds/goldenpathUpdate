@@ -1,0 +1,22 @@
+# Robots.txt for goldenpath.ae
+
+# Allow all standard bots
+User-agent: *
+Disallow:
+
+# Allow Facebook, Telegram, Zalo bots for social sharing
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Facebot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+# Optional: Disallow some scrapers
+User-agent: BadBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://goldenpath.ae/sitemap.xml

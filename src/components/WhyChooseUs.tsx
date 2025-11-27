@@ -1,10 +1,6 @@
 "use client";
-import { useRef, useEffect, useState } from "react";
-
 import Image from "next/image";
-import Link from "next/link";
-import { services, Service } from "@/lib/data";
-import { H2, Paragraph, Button, H3 } from "@/components/ui";
+import { H2, Button } from "@/components/ui";
 import type { About } from "@/app/lib/types/about";
 type Props = {
   About: About;

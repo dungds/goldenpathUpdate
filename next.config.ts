@@ -1,22 +1,36 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '8000',
-        pathname: '/storage/**',
-      },
-    ],
-  },
-};
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer({
-  reactStrictMode: true,
-});
+const isProd = process.env.NODE_ENV === 'production';
 
-module.exports = nextConfig;
+const nextConfig = {
+  reactStrictMode: true,
+  images: {
+    remotePatterns: isProd
+      ? [
+          {
+            protocol: 'https',
+            hostname: 'api.goldenpath.ae',
+            pathname: '/storage/**',
+          },
+          {
+            protocol: 'https',
+            hostname: 'api.goldenpath.ae',
+            pathname: '/curator/**',
+          },
+        ]
+      : [
+          {
+            protocol: 'http',
+            hostname: 'localhost',
+            port: '8000',
+            pathname: '/storage/**',
+          },
+        ],
+  },
+};
+
+module.exports = withBundleAnalyzer(nextConfig);

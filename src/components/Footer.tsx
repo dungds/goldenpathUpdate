@@ -1,21 +1,14 @@
+"use client";
+
 import { Icon } from "@iconify/react";
 
 import { Paragraph } from "@/components/ui";
 import Link from "next/link";
-import Image from "next/image";
-import type { Setting } from "@/app/lib/types/settings";
-import type { Service } from "@/app/lib/types/services";
-import type { Industry } from "@/app/lib/types/industries";
-type HeaderProps = {
-  settings: Setting;
-  services: Service[];
-  industries: Industry[];
-};
-export default async function Header({
-  settings,
-  services,
-  industries,
-}: HeaderProps) {
+
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
+export default  function Footer() {
+const { settings, services = [], industries = [] } = useGlobal();
+
   if (!settings) return null;
 
   return (

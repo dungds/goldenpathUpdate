@@ -1,26 +1,18 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useCallback } from "react";
 
 import Link from "next/link";
 import { Icon } from "@iconify/react";
-import type { Service } from "@/app/lib/types/services";
-import type { Industry } from "@/app/lib/types/industries";
+import { useGlobal } from "@/app/context/SiteGlobalsContext";
 
-const menuItems = [
-  { label: "Home", href: "/" },
-  { label: "Industries", href: "/industries" },
-  { label: "Services", href: "/services" },
-  { label: "About Us", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
-type Props = {
-  services: Service[];
-  industries: Industry[];
-};
-export default function MobileMenu({ services, industries }: Props) {
+
+
+export default function MobileMenu() {
+  const { services = [], industries = [] } = useGlobal();
+  
   const pathname = usePathname();
   const activeClass = (href: string) => {
     if (href === "/") {

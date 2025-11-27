@@ -30,8 +30,8 @@ export default function ContactForm() {
     data?: {
       name: string;
       email: string;
-      phone: string;
-      message: string;
+      phone: string|null;
+      message: string|null;
       from: string | null;
     };
   }>({
@@ -61,7 +61,7 @@ export default function ContactForm() {
         });
       });
       const apiUrl =
-        process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+        process.env.NEXT_PUBLIC_API_URL || "https://api.goldenpath.ae";
       const formDataWithFrom = {
         ...form,
         from: "Contact Page",
@@ -145,7 +145,7 @@ export default function ContactForm() {
             placeholder="Name"
             value={form.name}
             required
-            className="w-full bg-background-light p-2   focus:border-primary focus:outline-none"
+            className="w-full bg-background-light p-2   focus:border-primary focus:outline-none text-text-primary"
           />
           <input
             name="email"
@@ -154,14 +154,14 @@ export default function ContactForm() {
             placeholder="Email*"
             value={form.email}
             required
-            className="w-full bg-background-light  p-2    focus:border-primary focus:outline-none"
+            className="w-full bg-background-light  p-2    focus:border-primary focus:outline-none text-text-primary"
           />
           <input
             name="phone"
             onChange={handleChange}
             placeholder="Phone"
             value={form.phone}
-            className="w-full bg-background-light  p-2    focus:border-primary focus:outline-none"
+            className="w-full bg-background-light  p-2    focus:border-primary focus:outline-none text-text-primary"
           />
           <textarea
             name="message"
@@ -169,7 +169,7 @@ export default function ContactForm() {
             onChange={handleChange}
             value={form.message}
             required
-            className="bg-background-light p-2 w-full h-40    focus:border-primary focus:outline-none "
+            className="bg-background-light p-2 w-full h-40    focus:border-primary focus:outline-none text-text-primary "
           />
 
           <Button type="submit" className="bg-primary px-12 py-3 w-full">
