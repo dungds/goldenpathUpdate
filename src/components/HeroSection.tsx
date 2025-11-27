@@ -65,22 +65,44 @@ export default function HeroSection() {
           </motion.div>
         </motion.div>
 
-        {/* Right Image - Không có Motion */}
-        <div className="relative order-1 md:order-2 h-full">
+        {/* Right Image - Fade + Glow */}
+        <motion.div 
+          className="relative order-1 md:order-2 h-full"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
           <div className="relative inset-0">
             {settings.main_banner_url && (
-              <Image
-                src={settings.main_banner_url}
-                alt="Hero Banner"
-                fill={false}
-                width={800}
-                height={400}
-                className="md:max-h-[500px] w-full h-auto object-contain relative md:absolute top-0"
-                priority
-              />
+              <>
+                {/* Glow Effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 blur-3xl rounded-full"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.4, 0.6, 0.4]
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                />
+                
+                {/* Image */}
+                <Image
+                  src={settings.main_banner_url}
+                  alt="Hero Banner"
+                  fill={false}
+                  width={800}
+                  height={400}
+                  className="md:max-h-[500px] w-full h-auto object-contain relative md:absolute top-0 drop-shadow-2xl"
+                  priority
+                />
+              </>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
