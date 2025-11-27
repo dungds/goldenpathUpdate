@@ -1,6 +1,6 @@
 "use client";
 import { useGlobal } from "@/app/context/SiteGlobalsContext";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, Variants } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { H1, Paragraph, Button } from "@/components/ui";
@@ -19,7 +19,7 @@ export default function HeroSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   // Animation variants
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -30,16 +30,14 @@ export default function HeroSection() {
     }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { 
       opacity: 0, 
-      y: 30,
-      filter: "blur(10px)"
+      y: 30
     },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: {
         duration: 0.8,
         ease: "easeOut"
@@ -47,7 +45,7 @@ export default function HeroSection() {
     }
   };
 
-  const imageVariants = {
+  const imageVariants: Variants = {
     hidden: { 
       opacity: 0, 
       scale: 0.8,
