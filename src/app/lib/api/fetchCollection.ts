@@ -1,38 +1,59 @@
+import { url } from 'inspector';
 import { notFound } from 'next/navigation';
 
-export async function fetchCollection<T>(endpoint: string): Promise<T[]> {
+const TAGS = {
+  settings: "settings",
+  services: "services",
+  industries: "industries",
+  faqs: "faqs",
+  partners: "partners",
+} as const;
+
+export async function fetchCollection<T>(endpoint: keyof typeof TAGS | string): Promise<T[]> {
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const url = `${baseUrl}/api/${endpoint}`;
-  console.log(`[fetchCollection] Fetching: ${url} at ${new Date().toISOString()}`);
-  console.log("Fetching from:", `${baseUrl}/global`);
-  const res = await fetch(`${baseUrl}/api/${endpoint}`, {
-    // next: { tags: [endpoint], revalidate: 3600 }
-    cache: "no-store"
+  const tag = TAGS[endpoint as keyof typeof TAGS] || endpoint;
+
+console.log(
+    `%c[FETCH COLLECTION] ${endpoint} → ${url}`,
+    'color: red; font-size: 16px; font-weight: bold; background: yellow; padding: 4px;'
+  );
+
+  const res = await fetch(url, {
+    next: {
+      revalidate: 86400,    
+      tags: [tag],          
+    },
   });
-  console.log(`[fetchCollection] Response status: ${res.status}`);
+
+  console.log(`[fetchCollection:${endpoint}] ${res.status === 304 ? "Cache hit" : "Fetched"}`);
 
   if (!res.ok) throw new Error(`Failed to fetch ${endpoint}`);
-  const data = await res.json();
-  console.log(`[fetchCollection] Received ${data?.data?.length || 0} items from ${endpoint}`);
-  console.log("[fetchCollection] data:", JSON.stringify(data, null, 2));
 
-  return data.data;
+  const json = await res.json();
+  return json.data || [];
 }
 
-export async function fetchItemBySlug<T>(endpoint: string, slug: string): Promise<T> {
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+export async function fetchItemBySlug<T>(endpoint: keyof typeof TAGS | string,
+  slug: string
+): Promise<T> {
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL!;
+  const tag = TAGS[endpoint as keyof typeof TAGS] || endpoint;
+console.log(
+    `%c[FETCH ITEM] ${endpoint}/${slug} → ${url}`,
+    'color: purple; font-size: 16px; font-weight: bold; background: cyan; padding: 4px;'
+  );
   const res = await fetch(`${baseUrl}/api/${endpoint}/${slug}`, {
-    // next: {
-    //   revalidate: 0,
-    //   tags: ["collectionSlug"],
-    // },
-    cache: "no-store",
+    next: {
+      revalidate: 86400,
+      tags: [`${tag}:${slug}`],   
+    },
   });
 
   if (!res.ok) {
-    // Nếu API trả lỗi -> điều hướng 404
-    notFound();
+    notFound(); 
   }
-  const data = await res.json();
-  return data.data;
+
+  const json = await res.json();
+  return json.data;
 }

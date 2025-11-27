@@ -5,10 +5,10 @@ export async function fetchPartners(): Promise<LogoPartner[]> {
   console.log("[fetchPartners] called at", new Date().toISOString());
 
   const res = await fetch(`${baseUrl}/api/partner`, {
-    // next: {
-    //   revalidate: 3000,
-    //   tags: ["partner"],
-    // },
+    next: {
+      revalidate: 3000,
+      tags: ["partner"],
+    },
     cache: "no-store"
   });
 
