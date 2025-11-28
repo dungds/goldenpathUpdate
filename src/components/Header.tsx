@@ -55,7 +55,7 @@ const { settings, services = [], industries = [] } = useGlobal();
           </Link>
         </div>
         <nav className="hidden lg:space-x-16 md:space-x-6 uppercase md:flex justify-between items-center ">
-          <Link href="/" className={`link-style ${activeClass("/")}`}>
+          <Link href="/" className={`link-style ${activeClass("/")}`} >
             Home
           </Link>
           <div
