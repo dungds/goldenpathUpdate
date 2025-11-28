@@ -19,17 +19,16 @@ export async function POST(req: NextRequest) {
 
     // Revalidate (support both string and array)
     const tags = Array.isArray(tag) ? tag : [tag];
+     const steps = [
+      `📨 Received tags: ${tags.join(', ')}`,
+      ...tags.map(t => `🗑️  Cleared cache: ${t}`),
+      `✅ Ready to rebuild on next request`
+    ];
+    
+    console.log(steps.join(' → '));
+    
     tags.forEach(t => revalidateTag(t));
 
-console.log("📨 Received revalidate request:", tags);
-    
-    tags.forEach(t => {
-      revalidateTag(t);
-      console.log(`🗑️  Cache cleared for tag: ${t}`);
-    });
-    
-    console.log("✅ Ready to rebuild cache on next request");
-    
     return Response.json({ revalidated: true, tags, now: Date.now() });
   } catch (error) {
     console.error("❌ Revalidation error:", error);
