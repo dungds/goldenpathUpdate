@@ -1,26 +1,31 @@
 import { revalidateTag } from "next/cache";
+import { NextRequest } from "next/server";
 
-export async function POST(req: Request) {
-  const { searchParams } = new URL(req.url);
-  
-let payload: { secret?: string; tag?: string } = {};
+export async function POST(req: NextRequest) {
   try {
-    payload = await req.json();
-  } catch {}
+    const { searchParams } = new URL(req.url);
+    const payload = await req.json().catch(() => ({}));
+    
+    const secret = searchParams.get("secret") || payload.secret;
+    const tag = payload.tag;
 
-  const secret = searchParams.get("secret") || payload.secret;
+    // Validate
+    if (secret !== process.env.NEXT_REVALIDATE_SECRET) {
+      return Response.json({ error: "Invalid token" }, { status: 401 });
+    }
+    if (!tag) {
+      return Response.json({ error: "Missing tag" }, { status: 400 });
+    }
 
-  if (secret !== process.env.NEXT_REVALIDATE_SECRET) {
-    return new Response("Invalid token", { status: 401 });
+    // Revalidate (support both string and array)
+    const tags = Array.isArray(tag) ? tag : [tag];
+    tags.forEach(t => revalidateTag(t));
+
+    console.log("✅ Revalidated:", tags);
+
+    return Response.json({ revalidated: true, tags, now: Date.now() });
+  } catch (error) {
+    console.error("❌ Revalidation error:", error);
+    return Response.json({ error: "Internal error" }, { status: 500 });
   }
-
-  const tag = payload.tag;
-
-  if (!tag) {
-    return new Response("Missing tag", { status: 400 });
-  }
-
-  revalidateTag(tag as string);
-
-  return Response.json({ revalidated: true, tag, now: Date.now() });
 }
