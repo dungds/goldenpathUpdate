@@ -5,13 +5,16 @@ export async function fetchAbout(): Promise<About> {
   
   const res = await fetch(`${baseUrl}/api/about`, {
     next: {
-      revalidate: 86400,    // Cache 24h
-      tags: ["about"],      // Tag để revalidate
+      revalidate: 86400,
+      tags: ["about"],
     },
   });
 
-  if (!res.ok) throw new Error("Failed to fetch About");
+  if (!res.ok) {
+    throw new Error(`Failed to fetch About: ${res.status}`);
+  }
   
   const json = await res.json();
-  return json.data || json; // Tùy structure API của bạn
+  
+  return json; 
 }
