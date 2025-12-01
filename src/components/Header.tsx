@@ -73,6 +73,7 @@ const { settings, services = [], industries = [] } = useGlobal();
   </div>
 
   <AnimatePresence>
+    {true && (
     <motion.div
       initial={{ opacity: 0, y: 12, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -105,13 +106,14 @@ const { settings, services = [], industries = [] } = useGlobal();
           <Link
             href={`/industries/${industry.slug}`}
             className="block text-text-muted hover:text-primary 
-                       hover:translate-x-1 transition-all duration-300"
+                       hover:translate-x-1 transition-all duration-300 normal-case"
           >
             {industry.name}
           </Link>
         </motion.div>
       ))}
     </motion.div>
+    )}
   </AnimatePresence>
 </div>
 
