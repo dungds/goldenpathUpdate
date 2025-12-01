@@ -14,7 +14,6 @@ export default function Header() {
 const { settings, services = [], industries = [] } = useGlobal();
   
   const pathname = usePathname();
-  // console.log(settings);
 
   const activeClass = (href: string) => {
     if (href === "/") {
@@ -75,7 +74,6 @@ const { settings, services = [], industries = [] } = useGlobal();
   
     
  <AnimatePresence>
-    {true && ( // luôn true để hover hoạt động, có thể thay bằng state nếu muốn
       <motion.div
         initial={{ opacity: 0, y: 15, scale: 0.95 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -86,11 +84,9 @@ const { settings, services = [], industries = [] } = useGlobal();
                    rounded-2xl border border-white/10 overflow-hidden 
                    min-w-[240px] py-3"
       >
-        {/* Mũi tên tam giác đẹp */}
         <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
                         bg-background/95 rotate-45 border-l border-t border-white/10" />
 
-        {/* Danh sách item hiện lần lượt */}
         {industries.map((industry, index) => (
           <motion.div
             key={industry.id}
@@ -99,7 +95,7 @@ const { settings, services = [], industries = [] } = useGlobal();
             exit={{ opacity: 0, x: -20 }}
             transition={{
               duration: 0.4,
-              delay: index * 0.07, // 70ms mỗi item → mượt như phim
+              delay: index * 0.07, 
               ease: [0.32, 0, 0.2, 1],
             }}
             className="px-8 py-3.5"
@@ -107,18 +103,16 @@ const { settings, services = [], industries = [] } = useGlobal();
             <Link
               href={`/industries/${industry.slug}`}
               className="block text-text-muted hover:text-primary 
-                         hover:translate-x-2 transition-all duration-300"
+                         hover:translate-x-2 transition-all duration-300 normal-case"
             >
               {industry.name}
             </Link>
           </motion.div>
         ))}
       </motion.div>
-    )}
   </AnimatePresence>
 </div>
 
-{/* ====== Services Dropdown (copy y hệt, chỉ đổi tên) ====== */}
 <div className={`group relative ${activeClass("/services")}`}>
   <div className="flex items-center gap-1 cursor-pointer">
     Services
