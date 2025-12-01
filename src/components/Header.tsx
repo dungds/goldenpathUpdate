@@ -66,14 +66,14 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             onMouseEnter={() => setHoveredDropdown("industries")}
             onMouseLeave={() => setHoveredDropdown(null)}
           >
-            <div className="flex items-center gap-1 cursor-pointer select-none">
+            <div className="flex gap-1 cursor-pointer select-none">
               Industries
               <Icon
                 icon="dashicons:arrow-down"
                 width="20"
                 height="20"
                 className={`text-primary transition-transform duration-300 ${
-                  hoveredDropdown === "industries" ? "-rotate-180" : "rotate-0"
+                  hoveredDropdown === "industries" ? "rotate-180" : "rotate-0"
                 }`}
               />
             </div>
@@ -118,14 +118,14 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             onMouseEnter={() => setHoveredDropdown("services")}
             onMouseLeave={() => setHoveredDropdown(null)}
           >
-            <div className="flex items-center gap-1 cursor-pointer select-none">
+            <div className="flex  gap-1 cursor-pointer select-none">
               Services
               <Icon
                 icon="dashicons:arrow-down"
                 width="20"
                 height="20"
                 className={`text-primary transition-transform duration-300 ${
-                  hoveredDropdown === "services" ? "-rotate-180" : "rotate-0"
+                  hoveredDropdown === "services" ? "rotate-180" : "rotate-0"
                 }`}
               />
             </div>
