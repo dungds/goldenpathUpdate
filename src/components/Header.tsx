@@ -12,7 +12,8 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Header() {
 const { settings, services = [], industries = [] } = useGlobal();
-  
+  const [isHovered, setIsHovered] = useState(false);
+
   const pathname = usePathname();
 
   const activeClass = (href: string) => {
@@ -73,7 +74,7 @@ const { settings, services = [], industries = [] } = useGlobal();
   </div>
 
   <AnimatePresence>
-    {true && (
+    {isHovered && (
     <motion.div
       initial={{ opacity: 0, y: 12, scale: 0.96 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
