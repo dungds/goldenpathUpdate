@@ -61,55 +61,60 @@ const { settings, services = [], industries = [] } = useGlobal();
           
           {/* ====== Industries Dropdown ====== */}
 <div className={`group relative ${activeClass("/industries")}`}>
-  <div className="flex items-center gap-1 cursor-pointer">
+  <div className="flex items-center gap-1 cursor-pointer select-none">
     Industries
     <Icon
-      className="text-primary transition-transform duration-300 group-hover:rotate-180"
       icon="dashicons:arrow-down"
       width="20"
       height="20"
+      className="text-primary transition-transform duration-300 
+                 group-hover:-rotate-180"   {/* thêm dấu - để trỏ lên khi hover */}
     />
   </div>
 
-  
-    
- <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0, y: 15, scale: 0.95 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-        transition={{ duration: 0.4, ease: [0.32, 0, 0.2, 1] }}
-        className="absolute left-1/2 -translate-x-1/2 top-full mt-4 
-                   bg-background/95 backdrop-blur-2xl shadow-2xl 
-                   rounded-2xl border border-white/10 overflow-hidden 
-                   min-w-[240px] py-3"
-      >
-        <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
-                        bg-background/95 rotate-45 border-l border-t border-white/10" />
+  {/* Dropdown – CHỈ HIỆN KHI HOVER */}
+  <AnimatePresence>
+    <motion.div
+      initial={{ opacity: 0, y: 12, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+      transition={{
+        duration: 0.35,
+        ease: [0.32, 0, 0.2, 1],
+        when: "beforeChildren",
+        staggerChildren: 0.05,
+      }}
+      className="pointer-events-none group-hover:pointer-events-auto
+                 absolute left-1/2 -translate-x-1/2 top-full mt-4
+                 opacity-0 group-hover:opacity-100
+                 translate-y-2 group-hover:translate-y-0
+                 bg-background/95 backdrop-blur-2xl shadow-2xl 
+                 rounded-2xl border border-white/10 overflow-hidden 
+                 min-w-[240px] py-4 z-50"
+    >
+      {/* Mũi tên tam giác */}
+      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
+                      bg-background/95 rotate-45 border-l border-t border-white/10" />
 
-        {industries.map((industry, index) => (
-          <motion.div
-            key={industry.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{
-              duration: 0.4,
-              delay: index * 0.07, 
-              ease: [0.32, 0, 0.2, 1],
-            }}
-            className="px-8 py-3.5"
+      {/* Các item – hiện tuần tự */}
+      {industries.map((industry) => (
+        <motion.div
+          key={industry.id}
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="px-8 py-3"
+        >
+          <Link
+            href={`/industries/${industry.slug}`}
+            className="block text-text-muted hover:text-primary 
+                       hover:translate-x-1 transition-all duration-300"
           >
-            <Link
-              href={`/industries/${industry.slug}`}
-              className="block text-text-muted hover:text-primary 
-                         hover:translate-x-2 transition-all duration-300 normal-case"
-            >
-              {industry.name}
-            </Link>
-          </motion.div>
-        ))}
-      </motion.div>
+            {industry.name}
+          </Link>
+        </motion.div>
+      ))}
+    </motion.div>
   </AnimatePresence>
 </div>
 
