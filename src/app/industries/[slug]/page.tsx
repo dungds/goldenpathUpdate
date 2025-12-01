@@ -27,7 +27,6 @@ export default async function IndustryDetail({  params}: {params: Promise<{ slug
             <Image
               src={industry.section1_image}
               alt="image service"
-              loading="lazy"
               height={400}
               width={600}
             />

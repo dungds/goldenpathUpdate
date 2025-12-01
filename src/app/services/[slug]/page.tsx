@@ -28,7 +28,6 @@ export default async  function ServiceDetail({  params}: {params: Promise<{ slug
               alt="image service"
               height={400}
               width={600}
-              loading="lazy"
             />
           )}
         </div>
