@@ -81,7 +81,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             <AnimatePresence>
               {hoveredDropdown === "industries" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
@@ -133,7 +133,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             <AnimatePresence>
               {hoveredDropdown === "services" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
