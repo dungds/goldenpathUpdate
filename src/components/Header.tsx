@@ -73,7 +73,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
                 width="20"
                 height="20"
                 className={`text-primary transition-transform duration-300 ${
-                  hoveredDropdown === "industries" ? "rotate-180" : "rotate-0"
+                  hoveredDropdown === "industries" ? "rotate-0" : "-rotate-180"
                 }`}
               />
             </div>
@@ -81,9 +81,9 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             <AnimatePresence>
               {hoveredDropdown === "industries" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0}}
+                  exit={{ opacity: 0, y: 8 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
                   className="absolute top-full left-0 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
                 >
@@ -125,7 +125,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
                 width="20"
                 height="20"
                 className={`text-primary transition-transform duration-300 ${
-                  hoveredDropdown === "services" ? "rotate-180" : "rotate-0"
+                  hoveredDropdown === "services" ? "rotate-0" : "rotate-180"
                 }`}
               />
             </div>
