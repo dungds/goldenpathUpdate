@@ -87,13 +87,12 @@ const { settings, services = [], industries = [] } = useGlobal();
         when: "beforeChildren",
         staggerChildren: 0.05,
       }}
-      className="pointer-events-none group-hover:pointer-events-auto
-                 absolute left-1/2 -translate-x-1/2 top-full mt-4
-                 opacity-0 group-hover:opacity-100
-                 translate-y-2 group-hover:translate-y-0
-                 bg-background/95 backdrop-blur-2xl shadow-2xl 
-                 rounded-2xl border border-white/10 overflow-hidden 
-                 min-w-[240px] py-4 z-50"
+   className={`absolute left-1/2 -translate-x-1/2 top-full mt-4
+            bg-background/95 backdrop-blur-2xl shadow-2xl 
+            rounded-2xl border border-white/10 overflow-hidden 
+            min-w-[240px] py-4 z-50
+            ${isHovered ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"}`}
+
     >
       <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
                       bg-background/95 rotate-45 border-l border-t border-white/10" />
