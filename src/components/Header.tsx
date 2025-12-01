@@ -61,7 +61,9 @@ const { settings, services = [], industries = [] } = useGlobal();
           </Link>
           
           {/* ====== Industries Dropdown ====== */}
-<div className={`group relative ${activeClass("/industries")}`}>
+<div className={`group relative ${activeClass("/industries")}`}   onMouseEnter={() => setIsHovered(true)}
+  onMouseLeave={() => setIsHovered(false)}>
+
   <div className="flex items-center gap-1 cursor-pointer select-none">
     Industries
     <Icon
