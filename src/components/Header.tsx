@@ -68,11 +68,10 @@ const { settings, services = [], industries = [] } = useGlobal();
       width="20"
       height="20"
       className="text-primary transition-transform duration-300 
-                 group-hover:-rotate-180"   {/* thêm dấu - để trỏ lên khi hover */}
+                 group-hover:-rotate-180"   
     />
   </div>
 
-  {/* Dropdown – CHỈ HIỆN KHI HOVER */}
   <AnimatePresence>
     <motion.div
       initial={{ opacity: 0, y: 12, scale: 0.96 }}
@@ -92,11 +91,9 @@ const { settings, services = [], industries = [] } = useGlobal();
                  rounded-2xl border border-white/10 overflow-hidden 
                  min-w-[240px] py-4 z-50"
     >
-      {/* Mũi tên tam giác */}
       <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
                       bg-background/95 rotate-45 border-l border-t border-white/10" />
 
-      {/* Các item – hiện tuần tự */}
       {industries.map((industry) => (
         <motion.div
           key={industry.id}
