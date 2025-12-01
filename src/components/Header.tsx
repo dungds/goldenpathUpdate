@@ -85,7 +85,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
+                  className="absolute top-full left-0 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
                 >
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-background/95 rotate-45 border-l border-t border-white/10" />
                   {industries.map((industry) => (
@@ -137,7 +137,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
+                  className="absolute top-full left-0  mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
                 >
                   <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-background/95 rotate-45 border-l border-t border-white/10" />
                   {services.map((service) => (
