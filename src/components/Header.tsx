@@ -82,7 +82,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
               {hoveredDropdown === "industries" && (
                 <motion.div
                   initial={{ opacity: 0, y: 6 ,scale: 0.96}}
-                  animate={{ opacity: 1, y: 0}}
+                  animate={{ opacity: 1, y: 0,scale: 1}}
                   exit={{ opacity: 0, y: 8 ,scale: 0.96}}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
                   className="absolute top-full left-0  bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
@@ -133,7 +133,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
             <AnimatePresence>
               {hoveredDropdown === "services" && (
                 <motion.div
-                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  initial={{ opacity: 0, y: 6, scale: 0.96 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 8, scale: 0.96 }}
                   transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
