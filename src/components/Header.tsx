@@ -12,7 +12,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function Header() {
 const { settings, services = [], industries = [] } = useGlobal();
-  const [isHovered, setIsHovered] = useState(false);
+const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services" | null>(null);
 
   const pathname = usePathname();
 
@@ -61,126 +61,106 @@ const { settings, services = [], industries = [] } = useGlobal();
           </Link>
           
           {/* ====== Industries Dropdown ====== */}
-<div className={`group relative ${activeClass("/industries")}`}   onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}>
-
-  <div className="flex items-center gap-1 cursor-pointer select-none">
-    Industries
-    <Icon
-      icon="dashicons:arrow-down"
-      width="20"
-      height="20"
-      className="text-primary transition-transform duration-300 
-                 group-hover:-rotate-180"   
-    />
-  </div>
-
-  <AnimatePresence>
-    {isHovered && (
-    <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.96 }}
-      transition={{
-        duration: 0.35,
-        ease: [0.32, 0, 0.2, 1],
-        when: "beforeChildren",
-        staggerChildren: 0.05,
-      }}
-   className={`absolute -translate-x-1/2 top-full 
-            bg-background/95 backdrop-blur-2xl shadow-2xl 
-            rounded-2xl border border-white/10 overflow-hidden 
-            min-w-[240px] py-4 z-50   mt-2 left-0
-
-            ${isHovered ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"}`}
-
-    >
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
-                      bg-background/95 rotate-45 border-l border-t border-white/10" />
-
-      {industries.map((industry) => (
-        <motion.div
-          key={industry.id}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="px-8 py-3"
-        >
-          <Link
-            href={`/industries/${industry.slug}`}
-            className="block text-text-muted hover:text-primary 
-                       hover:translate-x-1 transition-all duration-300 normal-case"
+ <div
+            className={`relative ${activeClass("/industries")}`}
+            onMouseEnter={() => setHoveredDropdown("industries")}
+            onMouseLeave={() => setHoveredDropdown(null)}
           >
-            {industry.name}
-          </Link>
-        </motion.div>
-      ))}
-    </motion.div>
-    )}
-  </AnimatePresence>
-</div>
+            <div className="flex items-center gap-1 cursor-pointer select-none">
+              Industries
+              <Icon
+                icon="dashicons:arrow-down"
+                width="20"
+                height="20"
+                className={`text-primary transition-transform duration-300 ${
+                  hoveredDropdown === "industries" ? "-rotate-180" : "rotate-0"
+                }`}
+              />
+            </div>
+
+            <AnimatePresence>
+              {hoveredDropdown === "industries" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
+                >
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-background/95 rotate-45 border-l border-t border-white/10" />
+                  {industries.map((industry) => (
+                    <motion.div
+                      key={industry.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="px-8 py-3"
+                    >
+                      <Link
+                        href={`/industries/${industry.slug}`}
+                        className="block text-text-muted hover:text-primary hover:translate-x-1 transition-all duration-300 normal-case"
+                      >
+                        {industry.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
 
 {/* service */}
 
-<div className={`group relative ${activeClass("/services")}`}   onMouseEnter={() => setIsHovered(true)}
-  onMouseLeave={() => setIsHovered(false)}>
-
-  <div className="flex items-center gap-1 cursor-pointer select-none">
-    Industries
-    <Icon
-      icon="dashicons:arrow-down"
-      width="20"
-      height="20"
-      className="text-primary transition-transform duration-300 
-                 group-hover:-rotate-180"   
-    />
-  </div>
-
-  <AnimatePresence>
-    {isHovered && (
-    <motion.div
-      initial={{ opacity: 0, y: 12, scale: 0.96 }}
-      animate={{ opacity: 1, y: 0, scale: 1 }}
-      exit={{ opacity: 0, y: 8, scale: 0.96 }}
-      transition={{
-        duration: 0.35,
-        ease: [0.32, 0, 0.2, 1],
-        when: "beforeChildren",
-        staggerChildren: 0.05,
-      }}
-   className={`absolute -translate-x-1/2 top-full 
-            bg-background/95 backdrop-blur-2xl shadow-2xl 
-            rounded-2xl border border-white/10 overflow-hidden 
-            min-w-[240px] py-4 z-50   mt-2 left-0
-
-            ${isHovered ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-2 pointer-events-none"}`}
-
-    >
-      <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 
-                      bg-background/95 rotate-45 border-l border-t border-white/10" />
-
-      {industries.map((service) => (
-        <motion.div
-          key={service.id}
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="px-8 py-3"
-        >
-          <Link
-            href={`/industries/${service.slug}`}
-            className="block text-text-muted hover:text-primary 
-                       hover:translate-x-1 transition-all duration-300 normal-case"
+ <div
+            className={`relative ${activeClass("/services")}`}
+            onMouseEnter={() => setHoveredDropdown("services")}
+            onMouseLeave={() => setHoveredDropdown(null)}
           >
-            {service.name}
-          </Link>
-        </motion.div>
-      ))}
-    </motion.div>
-    )}
-  </AnimatePresence>
-</div>
+            <div className="flex items-center gap-1 cursor-pointer select-none">
+              Services
+              <Icon
+                icon="dashicons:arrow-down"
+                width="20"
+                height="20"
+                className={`text-primary transition-transform duration-300 ${
+                  hoveredDropdown === "services" ? "-rotate-180" : "rotate-0"
+                }`}
+              />
+            </div>
+
+            <AnimatePresence>
+              {hoveredDropdown === "services" && (
+                <motion.div
+                  initial={{ opacity: 0, y: 12, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                  transition={{ duration: 0.3, ease: [0.32, 0, 0.2, 1] }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-background/95 backdrop-blur-2xl shadow-2xl rounded-2xl border border-white/10 overflow-hidden min-w-[240px] py-4 z-50 pointer-events-auto"
+                >
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-background/95 rotate-45 border-l border-t border-white/10" />
+                  {services.map((service) => (
+                    <motion.div
+                      key={service.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                      className="px-8 py-3"
+                    >
+                      <Link
+                        href={`/services/${service.slug}`}
+                        className="block text-text-muted hover:text-primary hover:translate-x-1 transition-all duration-300 normal-case"
+                      >
+                        {service.name}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
 
 
           <Link href="/about" className={`link-style ${activeClass("/about")}`}>
