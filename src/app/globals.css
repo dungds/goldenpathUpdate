@@ -70,3 +70,20 @@ body {
   width: 20px;
   border-radius: 9999px;
 }
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.42s;
+  animation-timing-function: cubic-bezier(0.32, 0, 0.2, 1);
+}
+
+::view-transition-old(root) {
+  animation-name: fade-out, slide-down;
+}
+::view-transition-new(root) {
+  animation-name: fade-in, slide-up;
+}
+
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in  { from { opacity:  opacity: 0; } }
+@keyframes slide-down { to { transform: translateY(20px) scale(0.96); } }
+@keyframes slide-up   { from { transform: translateY(-20px) scale(0.96); } }
