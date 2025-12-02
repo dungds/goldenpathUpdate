@@ -46,8 +46,10 @@ export default function AboutContent({ about }: AboutClientProps) {
             <Image
               src={about.section2.image || '/placeholder.png'}
               alt="about us banner"
-              loading="lazy"
               fill
+              priority
+              placeholder="blur"
+
             />
           )}
         </div>
