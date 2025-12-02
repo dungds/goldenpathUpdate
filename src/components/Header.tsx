@@ -45,7 +45,7 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
         <div>
           <Link href="/" className="z-50 block">
-  <div className="relative h-9 md:h-10 lg:h-12 w-full max-w-[280px]">
+  <div className="relative h-9 md:h-10 lg:h-12 w-300px max-w-[280px]">
     <Image
       src={settings.site_logo_url || "/fallback-logo.svg"}
       alt="Golden Path Logo"
