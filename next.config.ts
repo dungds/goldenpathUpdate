@@ -10,6 +10,9 @@ const nextConfig = {
   reactStrictMode: true,
 
   images: {
+    formats: ["image/avif", "image/webp"],
+    loader: "default",
+    remoteImagesPlaceholder: "blur",   
     remotePatterns: isProd
       ? [
           {
@@ -31,6 +34,7 @@ const nextConfig = {
             pathname: '/storage/**',
           },
         ],
+
   },
 };
 
