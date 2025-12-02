@@ -12,7 +12,7 @@ const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     loader: "default",
-    remoteImagesPlaceholder: "blur",   
+    
     remotePatterns: isProd
       ? [
           {

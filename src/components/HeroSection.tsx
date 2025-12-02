@@ -66,6 +66,7 @@ export default function HeroSection() {
                 height={400}
                 className="md:max-h-[500px] w-full h-auto object-contain relative md:absolute top-0"
                 priority
+                 placeholder="blur"
               />
             )}
           </div>
