@@ -8,7 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getSiteGlobals } from "./lib/api/fetchGlobal";
 import Script from "next/script";
-export const revalidate = 3600; // ISR cho layout
+// export const revalidate = 3600; // ISR cho layout
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
