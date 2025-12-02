@@ -24,7 +24,7 @@ export default function HeroSection() {
           src="/img/bg-hero.jpg"
           alt=""
           fill
-          className="absolute inset-0 object-cover z-0"
+          className="absolute inset-0 object-cover -z-10"
           priority
           quality={80}
         />
