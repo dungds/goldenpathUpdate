@@ -108,7 +108,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="bg-[url(/img/bg-contact.jpg)] bg-no-repeat bg-cover md:py-10 ">
+    <section className="bg-[url(/img/bg-contact.webp)] bg-no-repeat bg-cover md:py-10 ">
       <Script
         src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
       />
