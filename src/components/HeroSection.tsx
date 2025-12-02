@@ -19,15 +19,7 @@ export default function HeroSection() {
     <section className="">
       <div className="md:gap-10 lg:gap-30 md:pt-12 pb-10 text-text-on-dark
        md:px-10 lg:px-20 grid grid-cols-1 gap-6 items-center
-       md:grid-cols-[3fr_4fr]">
-        <Image
-          src="/img/bg-hero.jpg"
-          alt=""
-          fill
-          className="absolute inset-0 object-cover -z-10"
-          priority
-          quality={80}
-        />
+       md:grid-cols-[3fr_4fr] bg-[url(/img/bg-hero.jpg)] bg-no-repeat bg-center">
         
         <motion.div 
           className="order-2 md:order-1 mx-4 md:mx-0 pt-6 pb-6 md:pb-10"
@@ -66,7 +58,8 @@ export default function HeroSection() {
                 height={400}
                 className="md:max-h-[500px] w-full h-auto object-contain relative md:absolute top-0"
                 priority
-                 placeholder="blur"
+                                 placeholder="blur"
+
               />
             )}
           </div>
