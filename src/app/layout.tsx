@@ -8,7 +8,6 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getSiteGlobals } from "./lib/api/fetchGlobal";
 import Script from "next/script";
-import Template from './Template';
 // export const revalidate = 3600; // ISR cho layout
 
 const geistSans = Geist({
@@ -89,10 +88,7 @@ console.log(`[RootLayout] Loaded at ${new Date().toISOString()}`);
         />
 
                   <main className="mt-20">
-                      <Template>
-{children}
-</Template>
-</main>
+                    {children}</main>
 
         <Footer />
         </GlobalProvider>
