@@ -44,16 +44,18 @@ const [hoveredDropdown, setHoveredDropdown] = useState<"industries" | "services"
     >
       <div className="md:border-b  border-white  flex justify-between items-center py-4 md:py-2">
         <div>
-          <Link href={"/"}>
-          {/* <Image src={settings.site_logo_url} alt="logo Golden Path" width={200} height={80} /> */}
-            <img
-              src={settings.site_logo_url}
-              className="w-24 md:w-32"
-              width="180"
-              height="55"
-              alt="logo Golden Path"
-            />
-          </Link>
+          <Link href="/" className=" z-50">
+          <div className="relative w-48 md:w-64">
+          <Image
+            src={settings.site_logo_url || "/fallback-logo.svg"}
+            alt="Golden Path Logo"
+           fill
+            priority
+            unoptimized={true}  
+            className="w-24 md:w-32 h-auto transition-all duration-300"
+          />
+          </div>
+        </Link>
         </div>
         <nav className="hidden lg:space-x-16 md:space-x-6 uppercase md:flex justify-between items-center ">
           <Link href="/" className={`link-style ${activeClass("/")}`} >
